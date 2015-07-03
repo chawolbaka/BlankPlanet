@@ -1,0 +1,16 @@
+[
+{
+	"modid": "BlankPlanet",
+	"name": "Blank Planet",
+	"description": "A Galacticraft Addon.",
+	"version": "0.3",
+	"mcversion": "1.7.10",
+	"url": "",
+	"updateUrl": "",
+	"authors": [
+	"MJRLegends"
+	],
+	"credits": "Micdoodle8 & Radfast for creating galacticraft mod",
+	"logoFile": ""
+}
+]
