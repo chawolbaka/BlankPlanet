@@ -124,7 +124,6 @@ eclipse/
 *.exe
 bin/
 .settings/org.eclipse.jdt.core.prefs
-build.gradle
 gradle/wrapper/gradle-wrapper.properties
 gradlew
 gradlew.bat
