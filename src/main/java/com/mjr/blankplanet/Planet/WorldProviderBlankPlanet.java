@@ -5,7 +5,6 @@ import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.ISolarLevel;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
 
@@ -16,16 +15,15 @@ import com.mjr.blankplanet.Planet.worldGen.WorldChunkManagerBlankPlanet;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class WorldProviderBlankPlanet extends WorldProviderSpace implements
-IGalacticraftWorldProvider, ISolarLevel  {
+public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	@Override
 	public Vector3 getFogColor() {
-		return new Vector3(0,0,0);
+		return new Vector3(0, 0, 0);
 	}
 
 	@Override
 	public Vector3 getSkyColor() {
-		return new Vector3(0,0,0);
+		return new Vector3(0, 0, 0);
 	}
 
 	@Override

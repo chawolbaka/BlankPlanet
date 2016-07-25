@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java">
-		<attributes>
-			<attribute name="ignore_optional_problems" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src/main/resources">
-		<attributes>
-			<attribute name="ignore_optional_problems" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1291/forgeSrc-1.7.10-10.13.2.1291.jar" sourcepath="C:/Users/Mathew Rickards/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1291/forgeSrc-1.7.10-10.13.2.1291-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.11/9c0592c6e1e9ea296a70948081bd4cc84dda1289/launchwrapper-1.11.jar" sourcepath="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/net.minecraft/launchwrapper/1.11/ea64c0bce5e9f465cd56566530133331568d2157/launchwrapper-1.11-sources.jar"/>
@@ -69,9 +61,10 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.1/2d12c83fdfbc04ecabf02c7bc8cc54d034f0daac/lwjgl-platform-2.9.1-natives-osx.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/9c6ef172e8de35fd8d4d8783e4821e57cdef7445/guava-17.0.jar" sourcepath="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/17.0/7ca0efbeb87ca845b5d7a0ac9c21a4b7b95f7b28/guava-17.0-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/90a3822c38ec8c996e84c16a3477ef632cbc87a3/commons-lang3-3.3.2.jar" sourcepath="C:/Users/Mathew Rickards/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.3.2/d2a489573c0ed2c4942b3660decad5d65087b406/commons-lang3-3.3.2-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/Dropbox/Source Codes/Minecraft Forge Mods/BlankPlanet/GalacticraftCore-Dev-1.7-3.0.11.126.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/Dropbox/Source Codes/Minecraft Forge Mods/BlankPlanet/Galacticraft-Planets-Dev-1.7-3.0.11.126.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/Dropbox/Source Codes/Minecraft Forge Mods/BlankPlanet/MicdoodleCore-Dev-1.7-3.0.11.126.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mathew Rickards/.gradle/caches/minecraft/net/minecraftforge/forge/1.7.10-10.13.2.1291/start"/>
+	<classpathentry kind="lib" path="E:/Source Codes/Minecraft Forge Mods/Galacticraft-API-1.7-3.0.12.462.jar"/>
+	<classpathentry kind="lib" path="E:/Source Codes/Minecraft Forge Mods/GalacticraftCore-Dev-1.7-3.0.12.462.jar"/>
+	<classpathentry kind="lib" path="E:/Source Codes/Minecraft Forge Mods/Galacticraft-Planets-Dev-1.7-3.0.12.462.jar"/>
+	<classpathentry kind="lib" path="E:/Source Codes/Minecraft Forge Mods/MicdoodleCore-Dev-1.7-3.0.12.462.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
