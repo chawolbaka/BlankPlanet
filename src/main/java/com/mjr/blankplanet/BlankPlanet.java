@@ -10,6 +10,8 @@ import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -23,6 +25,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.mjr.blankplanet.Planet.BlankPlanetEvents;
 import com.mjr.blankplanet.Planet.TeleportTypeBlankPlanet;
@@ -46,7 +49,7 @@ public class BlankPlanet {
 
 	public static Planet blankPlanet;
 
-	public static Block teleport = new TeleportBlock(Material.rock).setUnlocalizedName("teleport");
+	public static Block teleport = new TeleportBlock(Material.rock).setRegistryName("teleport").setUnlocalizedName("teleport");
 
 	public static int dimensionid;
 
@@ -110,10 +113,15 @@ public class BlankPlanet {
 		config.save();
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
 		BlankPlanet.proxy.preInit(event);
+
+		GameRegistry.registerBlock(teleport, "teleport");
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		if (event.getSide() == Side.CLIENT) {
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
+		}
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
 		BlankPlanet.blankPlanet.setRingColorRGB(0.1F, 0.9F, 0.6F);
@@ -128,8 +136,6 @@ public class BlankPlanet {
 		GalacticraftRegistry.registerTeleportType(WorldProviderBlankPlanet.class, new TeleportTypeBlankPlanet());
 
 		GalacticraftRegistry.registerRocketGui(WorldProviderBlankPlanet.class, new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/RocketGui.png"));
-
-		GameRegistry.registerBlock(teleport, "teleport");
 	}
 
 	@EventHandler

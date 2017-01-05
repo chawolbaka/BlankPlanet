@@ -1,5 +1,5 @@
 {
-	"parent": "extraplanets:block/teleport",
+	"parent": "blankplanet:block/teleport",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],
