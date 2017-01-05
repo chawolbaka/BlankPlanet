@@ -8,6 +8,7 @@ import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -46,30 +47,31 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 	@Override
 	public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
 		if(BlankPlanet.makelandingplatform){
-			int X = player.getPlayerCoordinates().posX;
-			int Z = player.getPlayerCoordinates().posZ;
-			if(newWorld.isAirBlock(X, 100, Z) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)){
+			BlockPos playerPos = player.getPosition();
+			int X = playerPos.getX();
+			int Z = playerPos.getZ();
+			if(newWorld.isAirBlock(new BlockPos(X, 100, Z)) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)){
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlock(X + i, 100, Z + j, Blocks.stone);
+						newWorld.setBlockState(new BlockPos(X + i, 100, Z + j), Blocks.stone.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlock(X - i, 100, Z + j, Blocks.stone);
+						newWorld.setBlockState(new BlockPos(X - i, 100, Z + j), Blocks.stone.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlock(X + i, 100, Z - j, Blocks.stone);
+						newWorld.setBlockState(new BlockPos(X + i, 100, Z - j), Blocks.stone.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlock(X - i, 100, Z - j, Blocks.stone);
+						newWorld.setBlockState(new BlockPos(X - i, 100, Z - j), Blocks.stone.getDefaultState());
 					}
 				}
 			}

@@ -12,9 +12,6 @@ import com.mjr.blankplanet.BlankPlanet;
 import com.mjr.blankplanet.Planet.worldGen.ChunkProviderBlankPlanet;
 import com.mjr.blankplanet.Planet.worldGen.WorldChunkManagerBlankPlanet;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	@Override
 	public Vector3 getFogColor() {
@@ -54,12 +51,6 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	@Override
 	public Class<? extends WorldChunkManager> getWorldChunkManagerClass() {
 		return WorldChunkManagerBlankPlanet.class;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public float getStarBrightness(float par1) {
-		return BlankPlanet.star;
 	}
 
 	@Override
@@ -130,5 +121,15 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	@Override
 	public double getSolarEnergyMultiplier() {
 		return BlankPlanet.solar;
+	}
+
+	@Override
+	public String getDimensionName() {
+		return "BlackHole";
+	}
+
+	@Override
+	public String getInternalNameSuffix() {
+		return "_blackHole";
 	}
 }

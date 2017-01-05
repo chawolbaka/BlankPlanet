@@ -10,3 +10,6 @@ gradlew
 gradlew.bat
 .classpath
 .project
+build/
+run/
+*.launch
