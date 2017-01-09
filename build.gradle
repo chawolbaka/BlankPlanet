@@ -39,9 +39,9 @@ minecraft {
 
 dependencies {
 	compile files (
-		"../ExtraPlanets Development (MC 1.8.9)/GalacticraftCore-1.8.9-4.0.0.38-BETA.jar",
-		"../ExtraPlanets Development (MC 1.8.9)/Galacticraft-Planets-1.8.9-4.0.0.38-BETA.jar",
-		"../ExtraPlanets Development (MC 1.8.9)/MicdoodleCore-1.8.9-4.0.0.38-BETA.jar",
+		"../ExtraPlanets Development (MC 1.8.9)/GalacticraftCore-1.8.9-4.0.0.38-BETA-dev.jar",
+		"../ExtraPlanets Development (MC 1.8.9)/Galacticraft-Planets-1.8.9-4.0.0.38-BETA-dev.jar",
+		"../ExtraPlanets Development (MC 1.8.9)/MicdoodleCore-1.8.9-4.0.0.38-BETA-dev.jar",
 	)
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
