@@ -5,6 +5,7 @@ import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.ISolarLevel;
+import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -16,7 +17,7 @@ import com.mjr.blankplanet.Planet.worldGen.ChunkProviderBlankPlanet;
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	public WorldProviderBlankPlanet() {
 		super();
-		this.hasNoSky = true;
+		this.setCloudRenderer(new CloudRenderer());
 	}
 
 	@Override
@@ -32,6 +33,11 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	@Override
 	public boolean canRainOrSnow() {
 		return false;
+	}
+
+	@Override
+	public void updateWeather() {
+		super.updateWeather();
 	}
 
 	@Override
@@ -142,5 +148,11 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	@Override
 	public DimensionType getDimensionType() {
 		return BlankPlanet.blackHole;
+	}
+
+	@Override
+	public boolean isDaytime() {
+		final float a = this.worldObj.getCelestialAngle(0F);
+		return a < 0.42F || a > 0.58F;
 	}
 }
