@@ -7,13 +7,12 @@ import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
 
 import com.google.common.collect.Lists;
 
-public class ChunkProviderBlankPlanet extends ChunkProviderNew {
+public class ChunkProviderBlankPlanet extends ChunkProviderCustom {
 
 	private final BiomeDecoratorBlankPlanet BiomeDecorator = new BiomeDecoratorBlankPlanet();
 
@@ -27,8 +26,8 @@ public class ChunkProviderBlankPlanet extends ChunkProviderNew {
 	}
 
 	@Override
-	protected BiomeGenBase[] getBiomesForGeneration() {
-		return new BiomeGenBase[] { BlankPlanetBiomes.blankplanet };
+	protected Biome[] getBiomesForGeneration() {
+		return new Biome[] { BlankPlanetBiomes.blankplanet };
 	}
 
 	@Override
@@ -44,17 +43,17 @@ public class ChunkProviderBlankPlanet extends ChunkProviderNew {
 
 	@Override
 	protected BlockMetaPair getGrassBlock() {
-		return new BlockMetaPair(Blocks.air, (byte) 1);
+		return new BlockMetaPair(Blocks.AIR, (byte) 1);
 	}
 
 	@Override
 	protected BlockMetaPair getDirtBlock() {
-		return new BlockMetaPair(Blocks.air, (byte) 1);
+		return new BlockMetaPair(Blocks.AIR, (byte) 1);
 	}
 
 	@Override
 	protected BlockMetaPair getStoneBlock() {
-		return new BlockMetaPair(Blocks.air, (byte) 1);
+		return new BlockMetaPair(Blocks.AIR, (byte) 1);
 	}
 
 	@Override
@@ -83,12 +82,12 @@ public class ChunkProviderBlankPlanet extends ChunkProviderNew {
 	}
 
 	@Override
-	public void onPopulate(IChunkProvider provider, int cX, int cZ) {
-	}
-
-	@Override
 	public void onChunkProvide(int arg0, int arg1, ChunkPrimer arg2) {
 
 	}
 
+	@Override
+	public void onPopulate(int cX, int cZ) {
+
+	}
 }

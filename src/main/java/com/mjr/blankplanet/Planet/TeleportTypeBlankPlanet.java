@@ -8,7 +8,7 @@ import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
@@ -26,7 +26,7 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 		if (player != null)
         {
             GCPlayerStats stats = GCPlayerStats.get(player);
-            return new Vector3(stats.coordsTeleportedFromX, 103.0, stats.coordsTeleportedFromZ);
+            return new Vector3(stats.getCoordsTeleportedFromX(), 103.0, stats.getCoordsTeleportedFromZ());
         }
         return null;
 	}
@@ -53,25 +53,25 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 			if(newWorld.isAirBlock(new BlockPos(X, 100, Z)) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)){
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlockState(new BlockPos(X + i, 100, Z + j), Blocks.stone.getDefaultState());
+						newWorld.setBlockState(new BlockPos(X + i, 100, Z + j), Blocks.STONE.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlockState(new BlockPos(X - i, 100, Z + j), Blocks.stone.getDefaultState());
+						newWorld.setBlockState(new BlockPos(X - i, 100, Z + j), Blocks.STONE.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlockState(new BlockPos(X + i, 100, Z - j), Blocks.stone.getDefaultState());
+						newWorld.setBlockState(new BlockPos(X + i, 100, Z - j), Blocks.STONE.getDefaultState());
 					}
 				}
 				
 				for(int i = 0; i < 5; i++){
 					for(int j = 0; j < 5; j++){
-						newWorld.setBlockState(new BlockPos(X - i, 100, Z - j), Blocks.stone.getDefaultState());
+						newWorld.setBlockState(new BlockPos(X - i, 100, Z - j), Blocks.STONE.getDefaultState());
 					}
 				}
 			}
@@ -80,6 +80,5 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public void setupAdventureSpawn(EntityPlayerMP player) {
-		// TODO Auto-generated method stub
 	}
 }

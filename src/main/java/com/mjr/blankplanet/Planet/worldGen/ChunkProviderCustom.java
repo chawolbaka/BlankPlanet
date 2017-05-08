@@ -12,19 +12,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.IProgressUpdate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.ChunkProviderGenerate;
+import net.minecraft.world.gen.ChunkProviderOverworld;
 
 /**
  * Do not include this prefab class in your released mod download.
  */
-public abstract class ChunkProviderNew extends ChunkProviderGenerate {
+public abstract class ChunkProviderCustom extends ChunkProviderOverworld {
 	protected final Random rand;
 
 	private final Gradient noiseGen1;
@@ -37,7 +35,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 
 	protected final World worldObj;
 
-	private BiomeGenBase[] biomesForGeneration = this.getBiomesForGeneration();
+	private Biome[] biomesForGeneration = this.getBiomesForGeneration();
 
 	private final double TERRAIN_HEIGHT_MOD = this.getHeightModifier();
 	private final double SMALL_FEATURE_HEIGHT_MOD = this.getSmallFeatureHeightModifier();
@@ -56,7 +54,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 
 	private List<MapGenBaseMeta> worldGenerators;
 
-	public ChunkProviderNew(World par1World, long seed, boolean mapFeaturesEnabled) {
+	public ChunkProviderCustom(World par1World, long seed, boolean mapFeaturesEnabled) {
 		super(par1World, seed, mapFeaturesEnabled, "");
 		this.worldObj = par1World;
 		this.rand = new Random(seed);
@@ -79,15 +77,15 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 		this.noiseGen6.setFrequency(0.001F);
 		this.noiseGen7.setFrequency(0.005F);
 
-		for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-			for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
+		for (int x = 0; x < ChunkProviderCustom.CHUNK_SIZE_X; x++) {
+			for (int z = 0; z < ChunkProviderCustom.CHUNK_SIZE_Z; z++) {
 				final double baseHeight = this.noiseGen1.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * this.TERRAIN_HEIGHT_MOD;
 				final double smallHillHeight = this.noiseGen2.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * this.SMALL_FEATURE_HEIGHT_MOD;
 				double mountainHeight = Math.abs(this.noiseGen3.getNoise(chunkX * 16 + x, chunkZ * 16 + z));
 				double valleyHeight = Math.abs(this.noiseGen4.getNoise(chunkX * 16 + x, chunkZ * 16 + z));
-				final double featureFilter = this.noiseGen5.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.MAIN_FEATURE_FILTER_MOD;
-				final double largeFilter = this.noiseGen6.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.LARGE_FEATURE_FILTER_MOD;
-				final double smallFilter = this.noiseGen7.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.SMALL_FEATURE_FILTER_MOD - 0.5;
+				final double featureFilter = this.noiseGen5.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderCustom.MAIN_FEATURE_FILTER_MOD;
+				final double largeFilter = this.noiseGen6.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderCustom.LARGE_FEATURE_FILTER_MOD;
+				final double smallFilter = this.noiseGen7.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderCustom.SMALL_FEATURE_FILTER_MOD - 0.5;
 				mountainHeight = this.lerp(smallHillHeight, mountainHeight * this.MOUNTAIN_HEIGHT_MOD, this.fade(this.clamp(mountainHeight * 2, 0, 1)));
 				valleyHeight = this.lerp(smallHillHeight, valleyHeight * this.VALLEY_HEIGHT_MOD - this.VALLEY_HEIGHT_MOD + 9, this.fade(this.clamp((valleyHeight + 2) * 4, 0, 1)));
 
@@ -95,13 +93,11 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 				yDev = this.lerp(smallHillHeight, yDev, smallFilter);
 				yDev = this.lerp(baseHeight, yDev, featureFilter);
 
-				for (int y = 0; y < ChunkProviderNew.CHUNK_SIZE_Y; y++) {
+				for (int y = 0; y < ChunkProviderCustom.CHUNK_SIZE_Y; y++) {
 					if (y < this.MID_HEIGHT + yDev) {
-						primer.setBlockState(this.getIndex(x, y, z), this.getStoneBlock().getBlock().getStateFromMeta(this.getStoneBlock().getMetadata()));
-						// idArray[this.getIndex(x, y, z)] =
-						// this.getStoneBlock().getBlock();
-						// metaArray[this.getIndex(x, y, z)] =
-						// this.getStoneBlock().getMetadata();
+						primer.setBlockState(x, y, z, this.getStoneBlock().getBlock().getStateFromMeta(this.getStoneBlock().getMetadata()));
+						// idArray[this.getIndex(x, y, z)] = this.getStoneBlock().getBlock();
+						// metaArray[this.getIndex(x, y, z)] = this.getStoneBlock().getMetadata();
 					}
 				}
 			}
@@ -133,38 +129,38 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	}
 
 	@Override
-	public void replaceBlocksForBiome(int par1, int par2, ChunkPrimer primer, BiomeGenBase[] par4ArrayOfBiomeGenBase) {
+	// public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
+	public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn) {
 		final int var5 = 20;
 		final float var6 = 0.03125F;
 		this.noiseGen4.setFrequency(var6 * 2);
 		for (int var8 = 0; var8 < 16; ++var8) {
 			for (int var9 = 0; var9 < 16; ++var9) {
-				final int var12 = (int) (this.noiseGen4.getNoise(par1 * 16 + var8, par2 * 16 + var9) / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
+				final int var12 = (int) (this.noiseGen4.getNoise(x * 16 + var8, z * 16 + var9) / 3.0D + 3.0D + this.rand.nextDouble() * 0.25D);
 				int var13 = -1;
 				Block var14 = this.getGrassBlock().getBlock();
 				byte var14m = this.getGrassBlock().getMetadata();
 				Block var15 = this.getDirtBlock().getBlock();
 				byte var15m = this.getDirtBlock().getMetadata();
 
-				for (int var16 = ChunkProviderNew.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
+				for (int var16 = ChunkProviderCustom.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
 					final int index = this.getIndex(var8, var16, var9);
 
 					if (var16 <= 0 + this.rand.nextInt(5)) {
-						primer.setBlockState(index, Blocks.air.getDefaultState());
-						// arrayOfIDs[index] = Blocks.bedrock;
+						primer.setBlockState(var8, var16, var9, Blocks.AIR.getDefaultState());
+						// arrayOfIDs[index] = Blocks.AIR;
 					} else {
 						// final Block var18 = arrayOfIDs[index];
-						Block var18 = primer.getBlockState(index).getBlock();
+						Block var18 = primer.getBlockState(var8, var16, var9).getBlock();
 
-						if (Blocks.air == var18) {
+						if (Blocks.AIR == var18) {
 							var13 = -1;
 						} else if (var18 == this.getStoneBlock().getBlock()) {
-							// arrayOfMeta[index] =
-							// this.getStoneBlock().getMetadata();
+							// arrayOfMeta[index] = this.getStoneBlock().getMetadata();
 
 							if (var13 == -1) {
 								if (var12 <= 0) {
-									var14 = Blocks.air;
+									var14 = Blocks.AIR;
 									var14m = 0;
 									var15 = this.getStoneBlock().getBlock();
 									var15m = this.getStoneBlock().getMetadata();
@@ -180,17 +176,17 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 								if (var16 >= var5 - 1) {
 									// arrayOfIDs[index] = var14;
 									// arrayOfMeta[index] = var14m;
-									primer.setBlockState(index, var14.getStateFromMeta(var14m));
+									primer.setBlockState(var8, var16, var9, var14.getStateFromMeta(var14m));
 								} else {
 									// arrayOfIDs[index] = var15;
 									// arrayOfMeta[index] = var15m;
-									primer.setBlockState(index, var15.getStateFromMeta(var15m));
+									primer.setBlockState(var8, var16, var9, var15.getStateFromMeta(var15m));
 								}
 							} else if (var13 > 0) {
 								--var13;
 								// arrayOfIDs[index] = var15;
 								// arrayOfMeta[index] = var15m;
-								primer.setBlockState(index, var15.getStateFromMeta(var15m));
+								primer.setBlockState(var8, var16, var9, var15.getStateFromMeta(var15m));
 							}
 						}
 					}
@@ -200,31 +196,31 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	}
 
 	@Override
-	public Chunk provideChunk(int par1, int par2) {
+	public Chunk provideChunk(int x, int z) {
 		ChunkPrimer primer = new ChunkPrimer();
-		this.rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
+		this.rand.setSeed(x * 341873128712L + z * 132897987541L);
 		// final Block[] ids = new Block[32768 * 2];
 		// final byte[] meta = new byte[32768 * 2];
-		this.generateTerrain(par1, par2, primer);
-		this.createCraters(par1, par2, primer);
-		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
-		this.replaceBlocksForBiome(par1, par2, primer, this.biomesForGeneration);
+		this.generateTerrain(x, z, primer);
+		this.createCraters(x, z, primer);
+		this.biomesForGeneration = this.worldObj.getBiomeProvider().getBiomes(this.biomesForGeneration, x * 16, z * 16, 16, 16);
+		this.replaceBiomeBlocks(x, z, primer, this.biomesForGeneration);
 
 		if (this.worldGenerators == null) {
 			this.worldGenerators = this.getWorldGenerators();
 		}
 
 		for (MapGenBaseMeta generator : this.worldGenerators) {
-			generator.generate(this, this.worldObj, par1, par2, primer);
+			generator.generate(this.worldObj, x, z, primer);
 		}
 
-		this.onChunkProvide(par1, par2, primer);
+		this.onChunkProvide(x, z, primer);
 
-		final Chunk var4 = new Chunk(this.worldObj, primer, par1, par2);
+		final Chunk var4 = new Chunk(this.worldObj, primer, x, z);
 		final byte[] var5 = var4.getBiomeArray();
 
 		for (int var6 = 0; var6 < var5.length; ++var6) {
-			var5[var6] = (byte) this.biomesForGeneration[var6].biomeID;
+			var5[var6] = (byte) Biome.getIdForBiome(this.biomesForGeneration[var6]);
 		}
 
 		var4.generateSkylightMap();
@@ -235,8 +231,8 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 		this.noiseGen5.setFrequency(0.015F);
 		for (int cx = chunkX - 2; cx <= chunkX + 2; cx++) {
 			for (int cz = chunkZ - 2; cz <= chunkZ + 2; cz++) {
-				for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-					for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
+				for (int x = 0; x < ChunkProviderCustom.CHUNK_SIZE_X; x++) {
+					for (int z = 0; z < ChunkProviderCustom.CHUNK_SIZE_Z; z++) {
 						if (Math.abs(this.randFromPoint(cx * 16 + x, (cz * 16 + z) * 1000)) < this.noiseGen5.getNoise(cx * 16 + x, cz * 16 + z) / this.CRATER_PROB) {
 							final Random random = new Random(cx * 16 + x + (cz * 16 + z) * 5000);
 							final EnumCraterSize cSize = EnumCraterSize.sizeArray[random.nextInt(EnumCraterSize.sizeArray.length)];
@@ -250,8 +246,8 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	}
 
 	public void makeCrater(int craterX, int craterZ, int chunkX, int chunkZ, int size, ChunkPrimer primer) {
-		for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-			for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
+		for (int x = 0; x < ChunkProviderCustom.CHUNK_SIZE_X; x++) {
+			for (int z = 0; z < ChunkProviderCustom.CHUNK_SIZE_Z; z++) {
 				double xDev = craterX - (chunkX + x);
 				double zDev = craterZ - (chunkZ + z);
 				if (xDev * xDev + zDev * zDev < size * size) {
@@ -262,9 +258,9 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 					yDev = 5 - yDev;
 					int helper = 0;
 					for (int y = 127; y > 0; y--) {
-						if (Blocks.air != primer.getBlockState(this.getIndex(x, y, z)).getBlock() && helper <= yDev) {
-							primer.setBlockState(getIndex(x, y, z), Blocks.air.getDefaultState());
-							// chunkArray[this.getIndex(x, y, z)] = Blocks.air;
+						if (Blocks.AIR != primer.getBlockState(x, y, z).getBlock() && helper <= yDev) {
+							primer.setBlockState(x, y, z, Blocks.AIR.getDefaultState());
+							// chunkArray[this.getIndex(x, y, z)] = Blocks.AIR;
 							// metaArray[this.getIndex(x, y, z)] = 0;
 							helper++;
 						}
@@ -289,57 +285,36 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 		return 1.0 - (n * (n * n * 15731 + 789221) + 1376312589 & 0x7fffffff) / 1073741824.0;
 	}
 
-	@Override
-	public boolean chunkExists(int par1, int par2) {
-		return true;
-	}
-
 	public void decoratePlanet(World par1World, Random par2Random, int par3, int par4) {
 		this.getBiomeGenerator().decorate(par1World, par2Random, par3, par4);
 	}
 
 	@Override
-	public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
+	public void populate(int x, int z) {
 		BlockFalling.fallInstantly = true;
-		int var4 = par2 * 16;
-		int var5 = par3 * 16;
-		this.worldObj.getBiomeGenForCoords(new BlockPos(var4 + 16, 0, var5 + 16));
+		int var4 = x * 16;
+		int var5 = z * 16;
+		this.worldObj.getBiome(new BlockPos(var4 + 16, 0, var5 + 16));
 		this.rand.setSeed(this.worldObj.getSeed());
 		final long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		final long var9 = this.rand.nextLong() / 2L * 2L + 1L;
-		this.rand.setSeed(par2 * var7 + par3 * var9 ^ this.worldObj.getSeed());
+		this.rand.setSeed(x * var7 + z * var9 ^ this.worldObj.getSeed());
 		this.decoratePlanet(this.worldObj, this.rand, var4, var5);
-		this.onPopulate(par1IChunkProvider, par2, par3);
+		this.onPopulate(x, z);
 
 		BlockFalling.fallInstantly = false;
 	}
 
 	@Override
-	public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
-		return true;
-	}
-
-	@Override
-	public boolean canSave() {
-		return true;
-	}
-
-	@Override
-	public String makeString() {
-		return "RandomLevelSource";
-	}
-
-	@Override
-	public List<BiomeGenBase.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-		BiomeGenBase biomegenbase = this.worldObj.getBiomeGenForCoords(pos);
+	public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+		Biome biomegenbase = this.worldObj.getBiome(pos);
 		return biomegenbase.getSpawnableList(creatureType);
 	}
 
 	/**
 	 * Do not return null
 	 *
-	 * @return The biome generator for this world, handles ore, flower, etc
-	 *         generation. See GCBiomeDecoratorBase.
+	 * @return The biome generator for this world, handles ore, flower, etc generation. See GCBiomeDecoratorBase.
 	 */
 	protected abstract BiomeDecoratorSpace getBiomeGenerator();
 
@@ -348,7 +323,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	 *
 	 * @return Biome instance for generation
 	 */
-	protected abstract BiomeGenBase[] getBiomesForGeneration();
+	protected abstract Biome[] getBiomesForGeneration();
 
 	/**
 	 * @return The average terrain level. Default is 64.
@@ -367,8 +342,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	/**
 	 * The grass block to be generated. Doesn't have to be grass of course.
 	 *
-	 * @return BlockMetaPair instance containing ID and metadata for grass
-	 *         block.
+	 * @return BlockMetaPair instance containing ID and metadata for grass block.
 	 */
 	protected abstract BlockMetaPair getGrassBlock();
 
@@ -382,8 +356,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	/**
 	 * The stone block to be generated. Doesn't have to be stone of course.
 	 *
-	 * @return BlockMetaPair instance containing ID and metadata for stone
-	 *         block.
+	 * @return BlockMetaPair instance containing ID and metadata for stone block.
 	 */
 	protected abstract BlockMetaPair getStoneBlock();
 
@@ -414,5 +387,5 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 
 	public abstract void onChunkProvide(int cX, int cZ, ChunkPrimer primer);
 
-	public abstract void onPopulate(IChunkProvider provider, int cX, int cZ);
+	public abstract void onPopulate(int cX, int cZ);
 }

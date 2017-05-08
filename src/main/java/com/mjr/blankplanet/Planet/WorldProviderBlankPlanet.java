@@ -5,14 +5,20 @@ import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.ISolarLevel;
-import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.biome.BiomeProvider;
+import net.minecraft.world.chunk.IChunkGenerator;
 
 import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.Planet.worldGen.BiomeProviderBlankPlanet;
 import com.mjr.blankplanet.Planet.worldGen.ChunkProviderBlankPlanet;
-import com.mjr.blankplanet.Planet.worldGen.WorldChunkManagerBlankPlanet;
 
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
+	public WorldProviderBlankPlanet() {
+		super();
+		this.hasNoSky = true;
+	}
+
 	@Override
 	public Vector3 getFogColor() {
 		return new Vector3(0, 0, 0);
@@ -44,13 +50,13 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	}
 
 	@Override
-	public Class<? extends IChunkProvider> getChunkProviderClass() {
+	public Class<? extends IChunkGenerator> getChunkProviderClass() {
 		return ChunkProviderBlankPlanet.class;
 	}
 
 	@Override
-	public Class<? extends WorldChunkManager> getWorldChunkManagerClass() {
-		return WorldChunkManagerBlankPlanet.class;
+	public Class<? extends BiomeProvider> getBiomeProviderClass() {
+		return BiomeProviderBlankPlanet.class;
 	}
 
 	@Override
@@ -124,12 +130,17 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	}
 
 	@Override
-	public String getDimensionName() {
-		return "BlackHole";
+	public boolean shouldDisablePrecipitation() {
+		return true;
 	}
 
 	@Override
-	public String getInternalNameSuffix() {
-		return "_blackHole";
+	public boolean shouldCorrodeArmor() {
+		return false;
+	}
+
+	@Override
+	public DimensionType getDimensionType() {
+		return BlankPlanet.blackHole;
 	}
 }

@@ -11,10 +11,11 @@ import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +32,7 @@ import com.mjr.blankplanet.Planet.BlankPlanetEvents;
 import com.mjr.blankplanet.Planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.Planet.WorldProviderBlankPlanet;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:GalacticraftCore;required-after:Forge@[11.15.1.1764,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:galacticraftcore;required-after:galacticraftplanets;required-after:Forge@[12.18.3.2239,);")
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
@@ -49,7 +50,7 @@ public class BlankPlanet {
 
 	public static Planet blankPlanet;
 
-	public static Block teleport = new TeleportBlock(Material.rock).setRegistryName("teleport").setUnlocalizedName("teleport");
+	public static Block teleport = new TeleportBlock(Material.ROCK).setUnlocalizedName("teleport");
 
 	public static int dimensionid;
 
@@ -78,6 +79,7 @@ public class BlankPlanet {
 	public static double fuel;
 
 	public static long daylength;
+	public static DimensionType blackHole = DimensionType.register("blankPlanet", "blankPlanet", dimensionid, WorldProviderBlankPlanet.class, false);
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -114,13 +116,14 @@ public class BlankPlanet {
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
 		BlankPlanet.proxy.preInit(event);
 
-		GameRegistry.registerBlock(teleport, "teleport");
+		GameRegistry.registerBlock(teleport, teleport.getUnlocalizedName().substring(5));
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT) {
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+					.register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
 		}
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
