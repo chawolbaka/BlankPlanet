@@ -20,7 +20,7 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "0.1-1.8.9"
+version = "0.2-1.8.9"
 group= "com.mjr.blankplanet" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "BlankPlanet"
 
@@ -39,9 +39,10 @@ minecraft {
 
 dependencies {
 	compile files (
-		"../ExtraPlanets Development (MC 1.8.9)/GalacticraftCore-1.8.9-4.0.0.38-BETA-dev.jar",
-		"../ExtraPlanets Development (MC 1.8.9)/Galacticraft-Planets-1.8.9-4.0.0.38-BETA-dev.jar",
-		"../ExtraPlanets Development (MC 1.8.9)/MicdoodleCore-1.8.9-4.0.0.38-BETA-dev.jar",
+		"../Galacticraft-API-1.8.9-4.0.0.99-BETA.jar",
+		"../GalacticraftCore-Dev-1.8.9-4.0.0.99-BETA.jar",
+		"../Galacticraft-Planets-Dev-1.8.9-4.0.0.99-BETA.jar",
+		"../MicdoodleCore-Dev-1.8.9-4.0.0.99-BETA.jar",
 	)
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
