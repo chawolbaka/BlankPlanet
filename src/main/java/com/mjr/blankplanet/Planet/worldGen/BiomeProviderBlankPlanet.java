@@ -1,4 +1,4 @@
-package com.mjr.blankplanet.Planet.worldGen;
+package com.mjr.blankplanet.planet.worldGen;
 
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeProviderSpace;
 import net.minecraft.world.biome.Biome;

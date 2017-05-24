@@ -1,7 +1,5 @@
 package com.mjr.blankplanet;
 
-import javax.annotation.Nullable;
-
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -9,7 +7,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +23,7 @@ public class TeleportBlock extends Block {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		int id = BlankPlanet.dimensionid;
 		if (!world.isRemote) {
 			if (BlankPlanet.reqiureXp) {
@@ -77,7 +74,7 @@ public class TeleportBlock extends Block {
 	}
 
 	private void tptoworld(EntityPlayerMP pl, int id, double xpos, double ypos, double zpos) {
-		final WorldServer world = (WorldServer) pl.worldObj;
+		final WorldServer world = (WorldServer) pl.world;
 		WorldUtil.transferEntityToDimension(pl, id, world);
 	}
 }

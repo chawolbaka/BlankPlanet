@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,14 +26,14 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-import com.mjr.blankplanet.Planet.BlankPlanetEvents;
-import com.mjr.blankplanet.Planet.TeleportTypeBlankPlanet;
-import com.mjr.blankplanet.Planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.planet.BlankPlanetEvents;
+import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
+import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.util.RegisterHelper;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:galacticraftcore;required-after:galacticraftplanets;required-after:Forge@[12.18.3.2239,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(13.20.0.2222,);")
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
@@ -43,8 +44,8 @@ public class BlankPlanet {
 
 	public static CreativeTabs BlocksTab = new CreativeTabs("BlankPlanetTab") {
 		@Override
-		public Item getTabIconItem() {
-			return Item.getItemFromBlock(GCBlocks.solarPanel);
+		public ItemStack getTabIconItem() {
+			return new ItemStack(Item.getItemFromBlock(GCBlocks.solarPanel));
 		}
 	};
 
@@ -79,7 +80,7 @@ public class BlankPlanet {
 	public static double fuel;
 
 	public static long daylength;
-	public static DimensionType blackHole = DimensionType.register("blankPlanet", "blankPlanet", dimensionid, WorldProviderBlankPlanet.class, false);
+	public static DimensionType blackHole = DimensionType.register("blankPlanet", "BlankPlanet", dimensionid, WorldProviderBlankPlanet.class, false);
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -116,7 +117,7 @@ public class BlankPlanet {
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
 		BlankPlanet.proxy.preInit(event);
 
-		GameRegistry.registerBlock(teleport, teleport.getUnlocalizedName().substring(5));
+		RegisterHelper.registerBlock(teleport, teleport.getUnlocalizedName().substring(5));
 	}
 
 	@EventHandler

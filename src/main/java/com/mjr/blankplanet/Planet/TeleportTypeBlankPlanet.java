@@ -1,4 +1,4 @@
-package com.mjr.blankplanet.Planet;
+package com.mjr.blankplanet.planet;
 
 import java.util.Random;
 

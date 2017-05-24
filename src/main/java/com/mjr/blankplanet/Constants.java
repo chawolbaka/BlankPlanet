@@ -1,7 +1,7 @@
 package com.mjr.blankplanet;
 
 public class Constants {
-	public static final String modID = "BlankPlanet";
+	public static final String modID = "blankplanet";
 	public static final String modName = "BlankPlanet";
 	public static final String modVersion = "0.1";
 	

@@ -1,12 +1,17 @@
-package com.mjr.blankplanet.Planet.worldGen;
+package com.mjr.blankplanet.planet.worldGen;
 
+import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.Constants;
+
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeGenBlankPlanet extends BlankPlanetBiomes {
 
 	public BiomeGenBlankPlanet(BiomeProperties properties) {
 		super(properties);
-		BiomeDictionary.registerBiomeType(this, BiomeDictionary.Type.DRY);
+		Biome.registerBiome(BlankPlanet.biomeid, Constants.TEXTURE_PREFIX + this.getBiomeName(), this);
+		BiomeDictionary.addTypes(this, BiomeDictionary.Type.VOID);
 	}
 
 }

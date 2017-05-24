@@ -1,4 +1,4 @@
-package com.mjr.blankplanet.Planet;
+package com.mjr.blankplanet.planet;
 
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
@@ -11,8 +11,8 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
 
 import com.mjr.blankplanet.BlankPlanet;
-import com.mjr.blankplanet.Planet.worldGen.BiomeProviderBlankPlanet;
-import com.mjr.blankplanet.Planet.worldGen.ChunkProviderBlankPlanet;
+import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
+import com.mjr.blankplanet.planet.worldGen.ChunkProviderBlankPlanet;
 
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	public WorldProviderBlankPlanet() {
@@ -152,7 +152,12 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 
 	@Override
 	public boolean isDaytime() {
-		final float a = this.worldObj.getCelestialAngle(0F);
+		final float a = this.world.getCelestialAngle(0F);
 		return a < 0.42F || a > 0.58F;
+	}
+
+	@Override
+	public int getDungeonSpacing() {
+		return 0;
 	}
 }

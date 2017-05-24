@@ -1,10 +1,12 @@
-package com.mjr.blankplanet.Planet.worldGen;
+package com.mjr.blankplanet.planet.worldGen;
+
+import com.mjr.blankplanet.BlankPlanet;
 
 import net.minecraft.world.biome.Biome;
 
 public class BlankPlanetBiomes extends Biome {
 
-	public static final Biome blankplanet = new BiomeGenBlankPlanet(new BiomeProperties("blankplanet").setRainfall(0.0F).setRainDisabled());
+	public static final Biome blankplanet = new BiomeGenBlankPlanet(new BiomeProperties(BlankPlanet.biomename).setRainfall(0.0F).setRainDisabled());
 
 	BlankPlanetBiomes(BiomeProperties properties) {
 		super(properties);
