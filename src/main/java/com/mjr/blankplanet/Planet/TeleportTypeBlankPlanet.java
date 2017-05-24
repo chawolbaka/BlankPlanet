@@ -26,7 +26,7 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 		if (player != null)
         {
             GCPlayerStats stats = GCPlayerStats.get(player);
-            return new Vector3(stats.coordsTeleportedFromX, 103.0, stats.coordsTeleportedFromZ);
+            return new Vector3(stats.getCoordsTeleportedFromX(), 103.0, stats.getCoordsTeleportedFromZ());
         }
         return null;
 	}

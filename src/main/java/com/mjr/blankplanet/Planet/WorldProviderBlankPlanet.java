@@ -132,4 +132,9 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	public String getInternalNameSuffix() {
 		return "_blackHole";
 	}
+
+	@Override
+	public int getDungeonSpacing() {
+		return 0;
+	}
 }
