@@ -155,4 +155,9 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 		final float a = this.worldObj.getCelestialAngle(0F);
 		return a < 0.42F || a > 0.58F;
 	}
+
+	@Override
+	public int getDungeonSpacing() {
+		return 0;
+	}
 }
