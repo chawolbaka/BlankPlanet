@@ -3,6 +3,11 @@ TODO = Not yet done
  
  
 ===============================================Released Updates===============================================
+0.3
+*Config: Added categories to section the types of options
+*Config: Added Teleport on First Join/Every Join/On Death options
+*Config: Removed not needed config option
+
 0.2
 *Small fixes due to Updating to Latest GC API
  
