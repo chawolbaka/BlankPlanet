@@ -1,0 +1,19 @@
+TODO = Not yet done
+===========================================Not yet Released Updates===========================================
+ 
+ 
+===============================================Released Updates===============================================
+0.4
+*Updated to latest version of Galacticraft API
+ 
+0.3
+*Added more to the config to allow the Planet to be customized
+*Fix a few issues
+*Added a Platform for when you spawn on the planet
+ 
+0.2
+*Added Teleporter block to the Block Hole
+*Added a config
+ 
+0.1
+*First Release
