@@ -30,6 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import com.mjr.blankplanet.Planet.BlankPlanetEvents;
 import com.mjr.blankplanet.Planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.Planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.handlers.ServerHandler;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
 
 @Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:GalacticraftCore;required-after:Forge@[11.15.1.1764,);")
 public class BlankPlanet {
@@ -78,6 +80,18 @@ public class BlankPlanet {
 	public static double fuel;
 
 	public static long daylength;
+	
+	public static boolean teleportOnDeath;
+	public static int spawnOnDealth;
+
+	public static boolean teleportOnJoin;
+	public static boolean teleportOnJoinEvery;
+	public static int spawnWorld;
+
+
+	public static final String CATEGORY_SPAWN = "advanced spawn options";
+	public static final String CATEGORY_DIMENSION = "dimension options";
+	public static final String CATEGORY_WORLD = "world options";
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -89,29 +103,40 @@ public class BlankPlanet {
 		config.renameProperty(Configuration.CATEGORY_GENERAL, "SpawnY", "Teleporter SpawnY");
 		config.renameProperty(Configuration.CATEGORY_GENERAL, "Clear inventory when teleport", "Clear inventory when using teleporter");
 
-		dimensionid = config.get(Configuration.CATEGORY_GENERAL, "Dimension id", "-99").getInt();
-		biomeid = config.get(Configuration.CATEGORY_GENERAL, "Biome id", "199").getInt();
-		biomename = config.get(Configuration.CATEGORY_GENERAL, "Biome name", "BlankPlanet").getString();
-		rocketTier = config.get(Configuration.CATEGORY_GENERAL, "Rocket reqiured", "3").getInt();
-		breathable = config.get(Configuration.CATEGORY_GENERAL, "Breathable Atmosphere", false).getBoolean(false);
-		gravity = (float) config.get(Configuration.CATEGORY_GENERAL, "Gravity", "0.058").getDouble();
-		daylength = config.get(Configuration.CATEGORY_GENERAL, "Day Length", "24000").getInt();
-		solar = config.get(Configuration.CATEGORY_GENERAL, "Solar Energy Multiplier", "8.0").getDouble();
-		fuel = config.get(Configuration.CATEGORY_GENERAL, "Fuel Usage Multiplier", "1.0").getDouble();
-		fallDamage = (float) config.get(Configuration.CATEGORY_GENERAL, "Fall Damage Multiplier", "0.3").getDouble();
-		windLevel = (float) config.get(Configuration.CATEGORY_GENERAL, "Wind Level", "0.0").getDouble();
-		thermal = (float) config.get(Configuration.CATEGORY_GENERAL, "Thermal Level Multiplier", "0.0").getDouble();
-		soundvol = (float) config.get(Configuration.CATEGORY_GENERAL, "Sound Vol Reduction", "10.0").getDouble();
-		star = (float) config.get(Configuration.CATEGORY_GENERAL, "Star Brightness", "1.0").getDouble();
+		dimensionid = config.get(CATEGORY_DIMENSION, "Dimension id", "-99").getInt();
+		biomeid = config.get(CATEGORY_DIMENSION, "Biome id", "199").getInt();
+		biomename = config.get(CATEGORY_DIMENSION, "Biome name", "BlankPlanet").getString();
+		makelandingplatform = config.get(CATEGORY_DIMENSION, "Make Landing Platforms", true).getBoolean(true);
+
+		rocketTier = config.get(CATEGORY_WORLD, "Rocket reqiured", "3").getInt();
+		breathable = config.get(CATEGORY_WORLD, "Breathable Atmosphere", false).getBoolean(false);
+		gravity = (float) config.get(CATEGORY_WORLD, "Gravity", "0.058").getDouble();
+		daylength = config.get(CATEGORY_WORLD, "Day Length", "24000").getInt();
+		solar = config.get(CATEGORY_WORLD, "Solar Energy Multiplier", "8.0").getDouble();
+		fuel = config.get(CATEGORY_WORLD, "Fuel Usage Multiplier", "1.0").getDouble();
+		fallDamage = (float) config.get(CATEGORY_WORLD, "Fall Damage Multiplier", "0.3").getDouble();
+		windLevel = (float) config.get(CATEGORY_WORLD, "Wind Level", "0.0").getDouble();
+		thermal = (float) config.get(CATEGORY_WORLD, "Thermal Level Multiplier", "0.0").getDouble();
+		soundvol = (float) config.get(CATEGORY_WORLD, "Sound Vol Reduction", "10.0").getDouble();
+		star = (float) config.get(CATEGORY_WORLD, "Star Brightness", "1.0").getDouble();
+
 		spawnX = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnX", "0").getInt();
 		spawnY = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnY", "100").getInt();
 		spawnZ = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnZ", "0").getInt();
-		clearinv = config.get(Configuration.CATEGORY_GENERAL, "Clear inventory when using teleporter", false).getBoolean(false);
-		makelandingplatform = config.get(Configuration.CATEGORY_GENERAL, "Make Landing Platforms", true).getBoolean(true);
+		// clearinv = config.get(Configuration.CATEGORY_GENERAL, "Clear inventory when using teleporter", false).getBoolean(false);
 		reqiureXp = config.get(Configuration.CATEGORY_GENERAL, "Teleporter reqiures Xp", false).getBoolean(false);
 		xpAmount = config.get(Configuration.CATEGORY_GENERAL, "Teleporter Xp amount", "1").getInt();
+
+		teleportOnDeath = config.get(CATEGORY_SPAWN, "Teleport Player on Death (skip bed spawns)", false).getBoolean(false);
+		spawnOnDealth = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'Teleport Player on Death' option", "" + dimensionid).getInt();
+
+		teleportOnJoin = config.get(CATEGORY_SPAWN, "Teleport Player only when they first join the world", false).getBoolean(false);
+		teleportOnJoinEvery = config.get(CATEGORY_SPAWN, "Teleport Player on everytime they join world", false).getBoolean(false);
+		spawnWorld = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'First/Everytime join world options'", "" + dimensionid).getInt();
+
 		config.save();
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
+		MinecraftForge.EVENT_BUS.register(new ServerHandler());
 		BlankPlanet.proxy.preInit(event);
 
 		GameRegistry.registerBlock(teleport, "teleport");
@@ -140,6 +165,8 @@ public class BlankPlanet {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		CapabilityStatsHandler.register();
+
 		BlankPlanet.proxy.postInit(event);
 	}
 }
