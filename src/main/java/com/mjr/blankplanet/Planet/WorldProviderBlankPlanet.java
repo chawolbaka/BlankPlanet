@@ -9,6 +9,8 @@ import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
 
 import com.mjr.blankplanet.BlankPlanet;
 import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
@@ -17,7 +19,8 @@ import com.mjr.blankplanet.planet.worldGen.ChunkProviderBlankPlanet;
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	public WorldProviderBlankPlanet() {
 		super();
-		this.setCloudRenderer(new CloudRenderer());
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+			this.setCloudRenderer(new CloudRenderer());
 	}
 
 	@Override
