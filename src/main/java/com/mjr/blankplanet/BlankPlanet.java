@@ -89,6 +89,8 @@ public class BlankPlanet {
 	public static boolean teleportOnJoin;
 	public static boolean teleportOnJoinEvery;
 	public static int spawnWorld;
+	
+	public static boolean spawnParachest;
 
 	public static final String CATEGORY_SPAWN = "advanced spawn options";
 	public static final String CATEGORY_DIMENSION = "dimension options";
@@ -129,6 +131,7 @@ public class BlankPlanet {
 		// clearinv = config.get(Configuration.CATEGORY_GENERAL, "Clear inventory when using teleporter", false).getBoolean(false);
 		reqiureXp = config.get(Configuration.CATEGORY_GENERAL, "Teleporter reqiures Xp", false).getBoolean(false);
 		xpAmount = config.get(Configuration.CATEGORY_GENERAL, "Teleporter Xp amount", "1").getInt();
+		spawnParachest = config.get(Configuration.CATEGORY_GENERAL, "Spawn Parachest on Teleport", false).getBoolean(false);
 
 		teleportOnDeath = config.get(CATEGORY_SPAWN, "Teleport Player on Death (skip bed spawns)", false).getBoolean(false);
 		spawnOnDealth = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'Teleport Player on Death' option", "" + dimensionid).getInt();
