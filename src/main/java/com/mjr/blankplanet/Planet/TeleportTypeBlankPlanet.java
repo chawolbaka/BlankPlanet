@@ -23,12 +23,11 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
-		if (player != null)
-        {
-            GCPlayerStats stats = GCPlayerStats.get(player);
-            return new Vector3(stats.getCoordsTeleportedFromX(), 103.0, stats.getCoordsTeleportedFromZ());
-        }
-        return null;
+		if (player != null) {
+			GCPlayerStats stats = GCPlayerStats.get(player);
+			return new Vector3(stats.getCoordsTeleportedFromX(), 103.0, stats.getCoordsTeleportedFromZ());
+		}
+		return null;
 	}
 
 	@Override
@@ -38,15 +37,18 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public Vector3 getParaChestSpawnLocation(WorldServer world, EntityPlayerMP player, Random rand) {
-		final double x = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
-        final double z = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
+		if (BlankPlanet.spawnParachest) {
+			final double x = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
+			final double z = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
 
-        return new Vector3(player.posX + x, 230.0D, player.posZ + z);
+			return new Vector3(player.posX + x, 230.0D, player.posZ + z);
+		} else
+			return null;
 	}
 
 	@Override
 	public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
-		if(BlankPlanet.makelandingplatform){
+		if (BlankPlanet.makelandingplatform) {
 			BlockPos playerPos = player.getPosition();
 			int X = playerPos.getX();
 			int Z = playerPos.getZ();
