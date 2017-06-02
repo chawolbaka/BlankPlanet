@@ -24,7 +24,7 @@ public class ServerHandler {
 		}
 	}
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onPlayerJoin(PlayerLoggedInEvent event) {
 		if (event.player instanceof EntityPlayer) {
 			if (BlankPlanet.teleportOnJoin) {
@@ -39,7 +39,7 @@ public class ServerHandler {
 		}
 	}
 
-	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		if (event.player instanceof EntityPlayer) {
 			if (BlankPlanet.teleportOnDeath) {
