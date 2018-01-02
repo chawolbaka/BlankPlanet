@@ -55,40 +55,36 @@ public class BlankPlanet {
 	public static Block teleport = new TeleportBlock(Material.ROCK).setUnlocalizedName("teleport");
 
 	public static int dimensionid;
-
 	public static int biomeid;
 	public static String biomename;
+	public static boolean makelandingplatform;
 
-	public static int rocketTier;
 	public static int spawnX;
 	public static int spawnY;
 	public static int spawnZ;
 	public static int xpAmount;
-
-	public static boolean clearinv;
-	public static boolean makelandingplatform;
 	public static boolean reqiureXp;
-	public static boolean breathable;
+	public static boolean clearinv;
 
+	public static int rocketTier;
+	public static boolean breathable;
 	public static float gravity;
 	public static float fallDamage;
 	public static float windLevel;
 	public static float thermal;
 	public static float soundvol;
 	public static float star;
-
 	public static double solar;
 	public static double fuel;
-
 	public static long daylength;
+	public static boolean onlyDay;
+	public static boolean onlyNight;
 
 	public static boolean teleportOnDeath;
 	public static int spawnOnDealth;
-
 	public static boolean teleportOnJoin;
 	public static boolean teleportOnJoinEvery;
 	public static int spawnWorld;
-
 	public static boolean spawnParachest;
 
 	public static DimensionType blackHole = DimensionType.register("blankPlanet", "blankPlanet", dimensionid, WorldProviderBlankPlanet.class, false);
@@ -124,6 +120,8 @@ public class BlankPlanet {
 		thermal = (float) config.get(CATEGORY_WORLD, "Thermal Level Multiplier", "0.0").getDouble();
 		soundvol = (float) config.get(CATEGORY_WORLD, "Sound Vol Reduction", "10.0").getDouble();
 		star = (float) config.get(CATEGORY_WORLD, "Star Brightness", "1.0").getDouble();
+		onlyDay = config.get(CATEGORY_WORLD, "Always Day Time", false).getBoolean(false);
+		onlyNight = config.get(CATEGORY_WORLD, "Always Night Time", false, "WILL GET IGNORED IF 'Always Daytime' IS ENABLED").getBoolean(false);
 
 		spawnX = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnX", "0").getInt();
 		spawnY = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnY", "100").getInt();
