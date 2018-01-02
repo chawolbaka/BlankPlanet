@@ -131,4 +131,14 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 	public double getSolarEnergyMultiplier() {
 		return BlankPlanet.solar;
 	}
+
+	@Override
+	public float calculateCelestialAngle(long p_76563_1_, float p_76563_3_) {
+		if (BlankPlanet.onlyDay)
+			return 1.0F;
+		else if (BlankPlanet.onlyNight)
+			return 0.0F;
+		else
+			return super.calculateCelestialAngle(p_76563_1_, p_76563_3_);
+	}
 }
