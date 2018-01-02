@@ -22,12 +22,11 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public Vector3 getPlayerSpawnLocation(WorldServer world, EntityPlayerMP player) {
-		if (player != null)
-        {
-            GCPlayerStats stats = GCPlayerStats.get(player);
-            return new Vector3(stats.coordsTeleportedFromX, 103.0, stats.coordsTeleportedFromZ);
-        }
-        return null;
+		if (player != null) {
+			GCPlayerStats stats = GCPlayerStats.get(player);
+			return new Vector3(stats.coordsTeleportedFromX, 103.0, stats.coordsTeleportedFromZ);
+		}
+		return null;
 	}
 
 	@Override
@@ -37,38 +36,41 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public Vector3 getParaChestSpawnLocation(WorldServer world, EntityPlayerMP player, Random rand) {
-		final double x = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
-        final double z = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
+		if (BlankPlanet.spawnParachest) {
+			final double x = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
+			final double z = (rand.nextDouble() * 2 - 1.0D) * 5.0D;
 
-        return new Vector3(player.posX + x, 230.0D, player.posZ + z);
+			return new Vector3(player.posX + x, 230.0D, player.posZ + z);
+		} else
+			return null;
 	}
 
 	@Override
 	public void onSpaceDimensionChanged(World newWorld, EntityPlayerMP player, boolean ridingAutoRocket) {
-		if(BlankPlanet.makelandingplatform){
+		if (BlankPlanet.makelandingplatform) {
 			int X = player.getPlayerCoordinates().posX;
 			int Z = player.getPlayerCoordinates().posZ;
-			if(newWorld.isAirBlock(X, 100, Z) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)){
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+			if (newWorld.isAirBlock(X, 100, Z) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)) {
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlock(X + i, 100, Z + j, Blocks.stone);
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlock(X - i, 100, Z + j, Blocks.stone);
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlock(X + i, 100, Z - j, Blocks.stone);
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlock(X - i, 100, Z - j, Blocks.stone);
 					}
 				}
@@ -78,6 +80,5 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 
 	@Override
 	public void setupAdventureSpawn(EntityPlayerMP player) {
-		// TODO Auto-generated method stub
 	}
 }
