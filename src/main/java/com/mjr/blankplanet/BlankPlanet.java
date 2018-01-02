@@ -80,7 +80,7 @@ public class BlankPlanet {
 	public static double fuel;
 
 	public static long daylength;
-	
+
 	public static boolean teleportOnDeath;
 	public static int spawnOnDealth;
 
@@ -89,7 +89,6 @@ public class BlankPlanet {
 	public static int spawnWorld;
 
 	public static boolean spawnParachest;
-
 
 	public static final String CATEGORY_SPAWN = "advanced spawn options";
 	public static final String CATEGORY_DIMENSION = "dimension options";
@@ -148,7 +147,8 @@ public class BlankPlanet {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT) {
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
+			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
+					.register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
 		}
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);

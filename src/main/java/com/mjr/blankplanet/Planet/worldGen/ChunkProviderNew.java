@@ -338,8 +338,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	/**
 	 * Do not return null
 	 *
-	 * @return The biome generator for this world, handles ore, flower, etc
-	 *         generation. See GCBiomeDecoratorBase.
+	 * @return The biome generator for this world, handles ore, flower, etc generation. See GCBiomeDecoratorBase.
 	 */
 	protected abstract BiomeDecoratorSpace getBiomeGenerator();
 
@@ -367,8 +366,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	/**
 	 * The grass block to be generated. Doesn't have to be grass of course.
 	 *
-	 * @return BlockMetaPair instance containing ID and metadata for grass
-	 *         block.
+	 * @return BlockMetaPair instance containing ID and metadata for grass block.
 	 */
 	protected abstract BlockMetaPair getGrassBlock();
 
@@ -382,8 +380,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	/**
 	 * The stone block to be generated. Doesn't have to be stone of course.
 	 *
-	 * @return BlockMetaPair instance containing ID and metadata for stone
-	 *         block.
+	 * @return BlockMetaPair instance containing ID and metadata for stone block.
 	 */
 	protected abstract BlockMetaPair getStoneBlock();
 

@@ -1,7 +1,6 @@
 package com.mjr.blankplanet.handlers;
 
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.WorldServer;
@@ -18,7 +17,7 @@ import com.mjr.blankplanet.handlers.capabilities.IStatsCapability;
 
 public class ServerHandler {
 	@SubscribeEvent
-    public void onAttachCapability(AttachCapabilitiesEvent.Entity event){
+	public void onAttachCapability(AttachCapabilitiesEvent.Entity event) {
 		if (event.getObject() instanceof EntityPlayerMP) {
 			event.addCapability(CapabilityStatsHandler.BP_PLAYER_PROP, new CapabilityProviderStats((EntityPlayerMP) event.getObject()));
 		}

@@ -26,7 +26,7 @@ public class CapabilityProviderStats implements ICapabilitySerializable<NBTTagCo
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (CapabilityStatsHandler.BP_STATS_CAPABILITY != null && capability == CapabilityStatsHandler.BP_STATS_CAPABILITY) {
-            return (T)(statsCapability);
+			return (T) (statsCapability);
 		}
 
 		return null;

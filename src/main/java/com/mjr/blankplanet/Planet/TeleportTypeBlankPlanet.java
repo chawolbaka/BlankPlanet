@@ -52,27 +52,27 @@ public class TeleportTypeBlankPlanet implements ITeleportType {
 			BlockPos playerPos = player.getPosition();
 			int X = playerPos.getX();
 			int Z = playerPos.getZ();
-			if(newWorld.isAirBlock(new BlockPos(X, 100, Z)) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)){
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+			if (newWorld.isAirBlock(new BlockPos(X, 100, Z)) && newWorld == DimensionManager.getWorld(BlankPlanet.dimensionid)) {
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlockState(new BlockPos(X + i, 100, Z + j), Blocks.stone.getDefaultState());
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlockState(new BlockPos(X - i, 100, Z + j), Blocks.stone.getDefaultState());
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlockState(new BlockPos(X + i, 100, Z - j), Blocks.stone.getDefaultState());
 					}
 				}
-				
-				for(int i = 0; i < 5; i++){
-					for(int j = 0; j < 5; j++){
+
+				for (int i = 0; i < 5; i++) {
+					for (int j = 0; j < 5; j++) {
 						newWorld.setBlockState(new BlockPos(X - i, 100, Z - j), Blocks.stone.getDefaultState());
 					}
 				}
