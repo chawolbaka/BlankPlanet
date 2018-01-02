@@ -43,7 +43,7 @@ public class ServerHandler {
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		if (event.player instanceof EntityPlayer) {
 			if (BlankPlanet.teleportOnDeath) {
-				tptoworld((EntityPlayerMP) event.player, BlankPlanet.spawnWorld);
+				tptoworld((EntityPlayerMP) event.player, BlankPlanet.spawnOnDealth);
 			}
 		}
 	}
