@@ -3,9 +3,8 @@ package micdoodle8.mods.galacticraft.api.transmission.tile;
 import micdoodle8.mods.galacticraft.api.transmission.grid.IGridNetwork;
 
 @SuppressWarnings("rawtypes")
-public interface INetworkProvider
-{
-    public IGridNetwork getNetwork();
+public interface INetworkProvider {
+	public IGridNetwork getNetwork();
 
-    public void setNetwork(IGridNetwork network);
+	public void setNetwork(IGridNetwork network);
 }

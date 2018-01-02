@@ -76,20 +76,20 @@ public class BlankPlanet {
 	public static double fuel;
 
 	public static long daylength;
-	
+
 	public static boolean teleportOnDeath;
 	public static int spawnOnDealth;
 
 	public static boolean teleportOnJoin;
 	public static boolean teleportOnJoinEvery;
 	public static int spawnWorld;
-	
+
 	public static boolean spawnParachest;
 
 	public static final String CATEGORY_SPAWN = "advanced spawn options";
 	public static final String CATEGORY_DIMENSION = "dimension options";
 	public static final String CATEGORY_WORLD = "world options";
-	
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(new File("config/BlankPlanet.cfg"));
@@ -104,7 +104,7 @@ public class BlankPlanet {
 		biomeid = config.get(CATEGORY_DIMENSION, "Biome id", "199").getInt();
 		biomename = config.get(CATEGORY_DIMENSION, "Biome name", "BlankPlanet").getString();
 		makelandingplatform = config.get(CATEGORY_DIMENSION, "Make Landing Platforms", true).getBoolean(true);
-		
+
 		rocketTier = config.get(CATEGORY_WORLD, "Rocket reqiured", "3").getInt();
 		breathable = config.get(CATEGORY_WORLD, "Breathable Atmosphere", false).getBoolean(false);
 		gravity = (float) config.get(CATEGORY_WORLD, "Gravity", "0.058").getDouble();
@@ -116,7 +116,7 @@ public class BlankPlanet {
 		thermal = (float) config.get(CATEGORY_WORLD, "Thermal Level Multiplier", "0.0").getDouble();
 		soundvol = (float) config.get(CATEGORY_WORLD, "Sound Vol Reduction", "10.0").getDouble();
 		star = (float) config.get(CATEGORY_WORLD, "Star Brightness", "1.0").getDouble();
-		
+
 		spawnX = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnX", "0").getInt();
 		spawnY = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnY", "100").getInt();
 		spawnZ = config.get(Configuration.CATEGORY_GENERAL, "Teleporter SpawnZ", "0").getInt();
@@ -127,10 +127,10 @@ public class BlankPlanet {
 
 		teleportOnDeath = config.get(CATEGORY_SPAWN, "Teleport Player on Death (skip bed spawns)", false).getBoolean(false);
 		spawnOnDealth = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'Teleport Player on Death' option", "" + dimensionid).getInt();
-		//teleportOnJoin = config.get(CATEGORY_SPAWN, "Teleport Player only when they first join the world", false).getBoolean(false);
+		// teleportOnJoin = config.get(CATEGORY_SPAWN, "Teleport Player only when they first join the world", false).getBoolean(false);
 		teleportOnJoinEvery = config.get(CATEGORY_SPAWN, "Teleport Player on everytime they join world", false).getBoolean(false);
 		spawnWorld = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'First/Everytime join world options'", "" + dimensionid).getInt();
-		
+
 		config.save();
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
 		BlankPlanet.proxy.preInit(event);

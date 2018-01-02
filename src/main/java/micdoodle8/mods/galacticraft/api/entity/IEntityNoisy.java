@@ -9,8 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Implement into entities that make a sound all the time, like rockets
  */
-public interface IEntityNoisy
-{
+public interface IEntityNoisy {
 	@SideOnly(Side.CLIENT)
 	public IUpdatePlayerListBox getSoundUpdater();
 

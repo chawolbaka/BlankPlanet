@@ -26,9 +26,9 @@ import net.minecraft.world.chunk.IChunkProvider;
 import com.google.common.collect.Lists;
 
 public class ChunkProviderBlankPlanet extends ChunkProviderNew {
-	
+
 	private final BiomeDecoratorBlankPlanet BiomeDecorator = new BiomeDecoratorBlankPlanet();
-	
+
 	public ChunkProviderBlankPlanet(World par1World, long seed, boolean mapFeaturesEnabled) {
 		super(par1World, seed, mapFeaturesEnabled);
 	}
@@ -51,44 +51,44 @@ public class ChunkProviderBlankPlanet extends ChunkProviderNew {
 	@Override
 	protected List<MapGenBaseMeta> getWorldGenerators() {
 		List<MapGenBaseMeta> generators = Lists.newArrayList();
-        return generators;
+		return generators;
 	}
 
 	@Override
 	protected SpawnListEntry[] getMonsters() {
 		List<BiomeGenBase.SpawnListEntry> monsters = new ArrayList<BiomeGenBase.SpawnListEntry>();
-        monsters.add(new BiomeGenBase.SpawnListEntry(EntityZombie.class, 8, 2, 3));
-        monsters.add(new BiomeGenBase.SpawnListEntry(EntitySpider.class, 8, 2, 3));
-        monsters.add(new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 8, 2, 3));
-        monsters.add(new BiomeGenBase.SpawnListEntry(EntityCreeper.class, 8, 2, 3));
-        monsters.add(new BiomeGenBase.SpawnListEntry(EntityEnderman.class, 8, 1, 3));
-        return monsters.toArray(new BiomeGenBase.SpawnListEntry[monsters.size()]);
+		monsters.add(new BiomeGenBase.SpawnListEntry(EntityZombie.class, 8, 2, 3));
+		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySpider.class, 8, 2, 3));
+		monsters.add(new BiomeGenBase.SpawnListEntry(EntitySkeleton.class, 8, 2, 3));
+		monsters.add(new BiomeGenBase.SpawnListEntry(EntityCreeper.class, 8, 2, 3));
+		monsters.add(new BiomeGenBase.SpawnListEntry(EntityEnderman.class, 8, 1, 3));
+		return monsters.toArray(new BiomeGenBase.SpawnListEntry[monsters.size()]);
 	}
 
 	@Override
 	protected SpawnListEntry[] getCreatures() {
 		List<BiomeGenBase.SpawnListEntry> creatures = new ArrayList<BiomeGenBase.SpawnListEntry>();
 		creatures.add(new BiomeGenBase.SpawnListEntry(EntityChicken.class, 8, 2, 4));
-        creatures.add(new BiomeGenBase.SpawnListEntry(EntityCow.class, 8, 2, 6));
-        creatures.add(new BiomeGenBase.SpawnListEntry(EntityHorse.class, 8, 2, 4));
-        creatures.add(new BiomeGenBase.SpawnListEntry(EntityPig.class, 8, 2, 6));
-        creatures.add(new BiomeGenBase.SpawnListEntry(EntitySheep.class, 8, 2, 6));
-        return creatures.toArray(new BiomeGenBase.SpawnListEntry[creatures.size()]);
+		creatures.add(new BiomeGenBase.SpawnListEntry(EntityCow.class, 8, 2, 6));
+		creatures.add(new BiomeGenBase.SpawnListEntry(EntityHorse.class, 8, 2, 4));
+		creatures.add(new BiomeGenBase.SpawnListEntry(EntityPig.class, 8, 2, 6));
+		creatures.add(new BiomeGenBase.SpawnListEntry(EntitySheep.class, 8, 2, 6));
+		return creatures.toArray(new BiomeGenBase.SpawnListEntry[creatures.size()]);
 	}
 
 	@Override
 	protected BlockMetaPair getGrassBlock() {
-		return new BlockMetaPair(Blocks.air,(byte) 1);
+		return new BlockMetaPair(Blocks.air, (byte) 1);
 	}
 
 	@Override
 	protected BlockMetaPair getDirtBlock() {
-		return new BlockMetaPair(Blocks.air,(byte) 1);
+		return new BlockMetaPair(Blocks.air, (byte) 1);
 	}
 
 	@Override
 	protected BlockMetaPair getStoneBlock() {
-		return new BlockMetaPair(Blocks.air,(byte) 1);
+		return new BlockMetaPair(Blocks.air, (byte) 1);
 	}
 
 	@Override

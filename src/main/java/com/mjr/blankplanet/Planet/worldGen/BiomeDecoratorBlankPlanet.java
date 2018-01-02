@@ -4,13 +4,12 @@ import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import net.minecraft.world.World;
 
 public class BiomeDecoratorBlankPlanet extends BiomeDecoratorSpace {
-	
-    private World currentWorld;
 
-    public BiomeDecoratorBlankPlanet()
-    {
+	private World currentWorld;
 
-    }
+	public BiomeDecoratorBlankPlanet() {
+
+	}
 
 	@Override
 	protected void setCurrentWorld(World world) {
@@ -24,7 +23,7 @@ public class BiomeDecoratorBlankPlanet extends BiomeDecoratorSpace {
 
 	@Override
 	protected void decorate() {
-		
+
 	}
 
 }
