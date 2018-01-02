@@ -19,6 +19,7 @@ import net.minecraftforge.common.config.Configuration;
 import com.mjr.blankplanet.Planet.BlankPlanetEvents;
 import com.mjr.blankplanet.Planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.Planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.Planet.handlers.ServerHandler;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -133,6 +134,7 @@ public class BlankPlanet {
 
 		config.save();
 		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
+		MinecraftForge.EVENT_BUS.register(new ServerHandler());
 		BlankPlanet.proxy.preInit(event);
 	}
 
