@@ -89,7 +89,7 @@ public class BlankPlanet {
 	public static boolean teleportOnJoin;
 	public static boolean teleportOnJoinEvery;
 	public static int spawnWorld;
-	
+
 	public static boolean spawnParachest;
 
 	public static final String CATEGORY_SPAWN = "advanced spawn options";
