@@ -87,7 +87,7 @@ public class BlankPlanet {
 	public static boolean teleportOnJoin;
 	public static boolean teleportOnJoinEvery;
 	public static int spawnWorld;
-	
+
 	public static boolean spawnParachest;
 
 
@@ -95,6 +95,7 @@ public class BlankPlanet {
 	public static final String CATEGORY_DIMENSION = "dimension options";
 	public static final String CATEGORY_WORLD = "world options";
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		Configuration config = new Configuration(new File("config/BlankPlanet.cfg"));
