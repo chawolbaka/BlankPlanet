@@ -1,8 +1,8 @@
 package com.mjr.blankplanet.planet.worldGen;
 
-import com.mjr.blankplanet.BlankPlanet;
-
 import net.minecraft.world.biome.Biome;
+
+import com.mjr.blankplanet.BlankPlanet;
 
 public class BlankPlanetBiomes extends Biome {
 

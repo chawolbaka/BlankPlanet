@@ -58,14 +58,14 @@ public class RegisterHelper {
 	}
 
 	public static void registerExtraPlanetsNonMobEntity(Class<? extends Entity> var0, String var1, int trackingDistance, int updateFreq, boolean sendVel) {
-		EntityRegistry.registerModEntity(new ResourceLocation(Constants.modID, var1),var0, var1, id++, BlankPlanet.instance, trackingDistance, updateFreq, sendVel);
+		EntityRegistry.registerModEntity(new ResourceLocation(Constants.modID, var1), var0, var1, id++, BlankPlanet.instance, trackingDistance, updateFreq, sendVel);
 	}
-	
+
 	public static void registerExtraPlanetsMobEntity(Class<? extends Entity> entityClass, String name, int back, int fore) {
 		registerExtraPlanetsNonMobEntity(entityClass, name, 80, 3, true);
 		EntityRegistry.registerEgg(new ResourceLocation(Constants.modID, name), back, fore);
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public static void setHarvestLevel(Block block, String toolClass, int level, int meta) {
 		block.setHarvestLevel(toolClass, level, block.getStateFromMeta(meta));
