@@ -1,9 +1,10 @@
 package com.mjr.blankplanet.planet.worldGen;
 
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import net.minecraft.world.World;
 
-public class BiomeDecoratorBlankPlanet extends BiomeDecoratorSpace {
+import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
+
+public class BiomeDecoratorBlankPlanet extends BiomeDecoratorBase {
 
 	private World currentWorld;
 

@@ -10,17 +10,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
 
 import com.mjr.blankplanet.BlankPlanet;
 import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
 import com.mjr.blankplanet.planet.worldGen.ChunkProviderBlankPlanet;
+import com.mjr.mjrlegendslib.util.MCUtilities;
 
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	public WorldProviderBlankPlanet() {
 		super();
-		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+		if (MCUtilities.isClient())
 			this.setCloudRenderer(new CloudRenderer());
 	}
 
