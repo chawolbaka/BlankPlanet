@@ -34,7 +34,7 @@ import com.mjr.mjrlegendslib.util.ClientUtilities;
 import com.mjr.mjrlegendslib.util.MCUtilities;
 import com.mjr.mjrlegendslib.util.RegisterUtilities;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib;required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(13.20.0.2222,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib@[1.11.2-1.0.2,);required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(13.20.0.2222,);")
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
