@@ -6,6 +6,7 @@ import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.IGalacticraftWorldProvider;
 import micdoodle8.mods.galacticraft.api.world.ISolarLevel;
 import micdoodle8.mods.galacticraft.core.client.CloudRenderer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.chunk.IChunkGenerator;
@@ -172,5 +173,11 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 			return 0.0F;
 		else
 			return super.calculateCelestialAngle(p_76563_1_, p_76563_3_);
+	}
+
+	@Override
+	public ResourceLocation getDungeonChestType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
