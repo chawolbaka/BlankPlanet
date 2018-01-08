@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
-import micdoodle8.mods.galacticraft.api.prefab.world.gen.BiomeDecoratorSpace;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
-import micdoodle8.mods.galacticraft.core.world.gen.EnumCraterSize;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.entity.EnumCreatureType;
@@ -21,10 +19,13 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.ChunkProviderGenerate;
 
-/**
- * Do not include this prefab class in your released mod download.
+import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
+
+/*
+ * Class from Galacticraft Core
+ * Credit micdoodle8, radfast
  */
-public abstract class ChunkProviderNew extends ChunkProviderGenerate {
+public abstract class ChunkProviderNoBedRock extends ChunkProviderGenerate {
 	protected final Random rand;
 
 	private final Gradient noiseGen1;
@@ -43,7 +44,6 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	private final double SMALL_FEATURE_HEIGHT_MOD = this.getSmallFeatureHeightModifier();
 	private final double MOUNTAIN_HEIGHT_MOD = this.getMountainHeightModifier();
 	private final double VALLEY_HEIGHT_MOD = this.getValleyHeightModifier();
-	private final int CRATER_PROB = this.getCraterProbability();
 
 	// DO NOT CHANGE
 	private final int MID_HEIGHT = this.getSeaLevel();
@@ -56,7 +56,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 
 	private List<MapGenBaseMeta> worldGenerators;
 
-	public ChunkProviderNew(World par1World, long seed, boolean mapFeaturesEnabled) {
+	public ChunkProviderNoBedRock(World par1World, long seed, boolean mapFeaturesEnabled) {
 		super(par1World, seed, mapFeaturesEnabled, "");
 		this.worldObj = par1World;
 		this.rand = new Random(seed);
@@ -79,15 +79,15 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 		this.noiseGen6.setFrequency(0.001F);
 		this.noiseGen7.setFrequency(0.005F);
 
-		for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-			for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
+		for (int x = 0; x < ChunkProviderNoBedRock.CHUNK_SIZE_X; x++) {
+			for (int z = 0; z < ChunkProviderNoBedRock.CHUNK_SIZE_Z; z++) {
 				final double baseHeight = this.noiseGen1.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * this.TERRAIN_HEIGHT_MOD;
 				final double smallHillHeight = this.noiseGen2.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * this.SMALL_FEATURE_HEIGHT_MOD;
 				double mountainHeight = Math.abs(this.noiseGen3.getNoise(chunkX * 16 + x, chunkZ * 16 + z));
 				double valleyHeight = Math.abs(this.noiseGen4.getNoise(chunkX * 16 + x, chunkZ * 16 + z));
-				final double featureFilter = this.noiseGen5.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.MAIN_FEATURE_FILTER_MOD;
-				final double largeFilter = this.noiseGen6.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.LARGE_FEATURE_FILTER_MOD;
-				final double smallFilter = this.noiseGen7.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNew.SMALL_FEATURE_FILTER_MOD - 0.5;
+				final double featureFilter = this.noiseGen5.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNoBedRock.MAIN_FEATURE_FILTER_MOD;
+				final double largeFilter = this.noiseGen6.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNoBedRock.LARGE_FEATURE_FILTER_MOD;
+				final double smallFilter = this.noiseGen7.getNoise(chunkX * 16 + x, chunkZ * 16 + z) * ChunkProviderNoBedRock.SMALL_FEATURE_FILTER_MOD - 0.5;
 				mountainHeight = this.lerp(smallHillHeight, mountainHeight * this.MOUNTAIN_HEIGHT_MOD, this.fade(this.clamp(mountainHeight * 2, 0, 1)));
 				valleyHeight = this.lerp(smallHillHeight, valleyHeight * this.VALLEY_HEIGHT_MOD - this.VALLEY_HEIGHT_MOD + 9, this.fade(this.clamp((valleyHeight + 2) * 4, 0, 1)));
 
@@ -95,13 +95,9 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 				yDev = this.lerp(smallHillHeight, yDev, smallFilter);
 				yDev = this.lerp(baseHeight, yDev, featureFilter);
 
-				for (int y = 0; y < ChunkProviderNew.CHUNK_SIZE_Y; y++) {
+				for (int y = 0; y < ChunkProviderNoBedRock.CHUNK_SIZE_Y; y++) {
 					if (y < this.MID_HEIGHT + yDev) {
 						primer.setBlockState(this.getIndex(x, y, z), this.getStoneBlock().getBlock().getStateFromMeta(this.getStoneBlock().getMetadata()));
-						// idArray[this.getIndex(x, y, z)] =
-						// this.getStoneBlock().getBlock();
-						// metaArray[this.getIndex(x, y, z)] =
-						// this.getStoneBlock().getMetadata();
 					}
 				}
 			}
@@ -146,22 +142,17 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 				Block var15 = this.getDirtBlock().getBlock();
 				byte var15m = this.getDirtBlock().getMetadata();
 
-				for (int var16 = ChunkProviderNew.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
+				for (int var16 = ChunkProviderNoBedRock.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
 					final int index = this.getIndex(var8, var16, var9);
 
 					if (var16 <= 0 + this.rand.nextInt(5)) {
 						primer.setBlockState(index, Blocks.air.getDefaultState());
-						// arrayOfIDs[index] = Blocks.bedrock;
 					} else {
-						// final Block var18 = arrayOfIDs[index];
 						Block var18 = primer.getBlockState(index).getBlock();
 
 						if (Blocks.air == var18) {
 							var13 = -1;
 						} else if (var18 == this.getStoneBlock().getBlock()) {
-							// arrayOfMeta[index] =
-							// this.getStoneBlock().getMetadata();
-
 							if (var13 == -1) {
 								if (var12 <= 0) {
 									var14 = Blocks.air;
@@ -178,18 +169,12 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 								var13 = var12;
 
 								if (var16 >= var5 - 1) {
-									// arrayOfIDs[index] = var14;
-									// arrayOfMeta[index] = var14m;
 									primer.setBlockState(index, var14.getStateFromMeta(var14m));
 								} else {
-									// arrayOfIDs[index] = var15;
-									// arrayOfMeta[index] = var15m;
 									primer.setBlockState(index, var15.getStateFromMeta(var15m));
 								}
 							} else if (var13 > 0) {
 								--var13;
-								// arrayOfIDs[index] = var15;
-								// arrayOfMeta[index] = var15m;
 								primer.setBlockState(index, var15.getStateFromMeta(var15m));
 							}
 						}
@@ -203,10 +188,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	public Chunk provideChunk(int par1, int par2) {
 		ChunkPrimer primer = new ChunkPrimer();
 		this.rand.setSeed(par1 * 341873128712L + par2 * 132897987541L);
-		// final Block[] ids = new Block[32768 * 2];
-		// final byte[] meta = new byte[32768 * 2];
 		this.generateTerrain(par1, par2, primer);
-		this.createCraters(par1, par2, primer);
 		this.biomesForGeneration = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
 		this.replaceBlocksForBiome(par1, par2, primer, this.biomesForGeneration);
 
@@ -231,62 +213,8 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 		return var4;
 	}
 
-	public void createCraters(int chunkX, int chunkZ, ChunkPrimer primer) {
-		this.noiseGen5.setFrequency(0.015F);
-		for (int cx = chunkX - 2; cx <= chunkX + 2; cx++) {
-			for (int cz = chunkZ - 2; cz <= chunkZ + 2; cz++) {
-				for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-					for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
-						if (Math.abs(this.randFromPoint(cx * 16 + x, (cz * 16 + z) * 1000)) < this.noiseGen5.getNoise(cx * 16 + x, cz * 16 + z) / this.CRATER_PROB) {
-							final Random random = new Random(cx * 16 + x + (cz * 16 + z) * 5000);
-							final EnumCraterSize cSize = EnumCraterSize.sizeArray[random.nextInt(EnumCraterSize.sizeArray.length)];
-							final int size = random.nextInt(cSize.MAX_SIZE - cSize.MIN_SIZE) + cSize.MIN_SIZE + 15;
-							this.makeCrater(cx * 16 + x, cz * 16 + z, chunkX * 16, chunkZ * 16, size, primer);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public void makeCrater(int craterX, int craterZ, int chunkX, int chunkZ, int size, ChunkPrimer primer) {
-		for (int x = 0; x < ChunkProviderNew.CHUNK_SIZE_X; x++) {
-			for (int z = 0; z < ChunkProviderNew.CHUNK_SIZE_Z; z++) {
-				double xDev = craterX - (chunkX + x);
-				double zDev = craterZ - (chunkZ + z);
-				if (xDev * xDev + zDev * zDev < size * size) {
-					xDev /= size;
-					zDev /= size;
-					final double sqrtY = xDev * xDev + zDev * zDev;
-					double yDev = sqrtY * sqrtY * 6;
-					yDev = 5 - yDev;
-					int helper = 0;
-					for (int y = 127; y > 0; y--) {
-						if (Blocks.air != primer.getBlockState(this.getIndex(x, y, z)).getBlock() && helper <= yDev) {
-							primer.setBlockState(getIndex(x, y, z), Blocks.air.getDefaultState());
-							// chunkArray[this.getIndex(x, y, z)] = Blocks.air;
-							// metaArray[this.getIndex(x, y, z)] = 0;
-							helper++;
-						}
-
-						if (helper > yDev) {
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-
 	private int getIndex(int x, int y, int z) {
 		return (x * 16 + z) * 256 + y;
-	}
-
-	private double randFromPoint(int x, int z) {
-		int n;
-		n = x + z * 57;
-		n = n << 13 ^ n;
-		return 1.0 - (n * (n * n * 15731 + 789221) + 1376312589 & 0x7fffffff) / 1073741824.0;
 	}
 
 	@Override
@@ -340,7 +268,7 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	 *
 	 * @return The biome generator for this world, handles ore, flower, etc generation. See GCBiomeDecoratorBase.
 	 */
-	protected abstract BiomeDecoratorSpace getBiomeGenerator();
+	protected abstract BiomeDecoratorBase getBiomeGenerator();
 
 	/**
 	 * Do not return null, have at least one biome for generation
@@ -403,11 +331,6 @@ public abstract class ChunkProviderNew extends ChunkProviderGenerate {
 	 * @return Height modifier for valleys
 	 */
 	public abstract double getValleyHeightModifier();
-
-	/**
-	 * @return Probability that craters will be generated
-	 */
-	public abstract int getCraterProbability();
 
 	public abstract void onChunkProvide(int cX, int cZ, ChunkPrimer primer);
 

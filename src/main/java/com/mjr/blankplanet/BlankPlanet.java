@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 
 import com.mjr.blankplanet.handlers.ServerHandler;
 import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
@@ -30,6 +29,7 @@ import com.mjr.blankplanet.planet.BlankPlanetEvents;
 import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
 import com.mjr.mjrlegendslib.util.ClientUtilities;
+import com.mjr.mjrlegendslib.util.MCUtilities;
 import com.mjr.mjrlegendslib.util.RegisterUtilities;
 
 @Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib;required-after:GalacticraftCore;required-after:Forge@[11.15.1.1764,);")
@@ -143,7 +143,7 @@ public class BlankPlanet {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		if (event.getSide() == Side.CLIENT) {
+		if (MCUtilities.isClient()) {
 			ClientUtilities.registerBlockJson(Constants.TEXTURE_PREFIX, BlankPlanet.teleport, 0, BlankPlanet.teleport.getUnlocalizedName().substring(5));
 		}
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
