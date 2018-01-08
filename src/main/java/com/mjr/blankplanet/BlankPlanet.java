@@ -10,12 +10,9 @@ import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -27,13 +24,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+import com.mjr.blankplanet.handlers.ServerHandler;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
 import com.mjr.blankplanet.planet.BlankPlanetEvents;
 import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
-import com.mjr.blankplanet.handlers.ServerHandler;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
+import com.mjr.mjrlegendslib.util.ClientUtilities;
+import com.mjr.mjrlegendslib.util.RegisterUtilities;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:GalacticraftCore;required-after:Forge@[11.15.1.1764,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib;required-after:GalacticraftCore;required-after:Forge@[11.15.1.1764,);")
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
@@ -135,8 +134,8 @@ public class BlankPlanet {
 		spawnWorld = config.get(CATEGORY_SPAWN, "Number ID of Dimesnion for 'First/Everytime join world options'", "" + dimensionid).getInt();
 
 		config.save();
-		MinecraftForge.EVENT_BUS.register(new BlankPlanetEvents());
-		MinecraftForge.EVENT_BUS.register(new ServerHandler());
+		RegisterUtilities.registerEventHandler(new BlankPlanetEvents());
+		RegisterUtilities.registerEventHandler(new ServerHandler());
 		BlankPlanet.proxy.preInit(event);
 
 		GameRegistry.registerBlock(teleport, "teleport");
@@ -145,8 +144,7 @@ public class BlankPlanet {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT) {
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher()
-					.register(Item.getItemFromBlock(BlankPlanet.teleport), 0, new ModelResourceLocation(Constants.modID + ":" + BlankPlanet.teleport.getUnlocalizedName().substring(5), "inventory"));
+			ClientUtilities.registerBlockJson(Constants.TEXTURE_PREFIX, BlankPlanet.teleport, 0, BlankPlanet.teleport.getUnlocalizedName().substring(5));
 		}
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
