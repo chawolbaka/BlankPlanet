@@ -222,8 +222,8 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderGenerate {
 		return true;
 	}
 
-	public void decoratePlanet(World par1World, Random par2Random, int par3, int par4) {
-		this.getBiomeGenerator().decorate(par1World, par2Random, par3, par4);
+	public void decoratePlanet(World par1World, Random par2Random, BlockPos pos) {
+		this.getBiomeGenerator().decorate(par1World, par2Random, null, pos);
 	}
 
 	@Override
@@ -236,7 +236,7 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderGenerate {
 		final long var7 = this.rand.nextLong() / 2L * 2L + 1L;
 		final long var9 = this.rand.nextLong() / 2L * 2L + 1L;
 		this.rand.setSeed(par2 * var7 + par3 * var9 ^ this.worldObj.getSeed());
-		this.decoratePlanet(this.worldObj, this.rand, var4, var5);
+		this.decoratePlanet(this.worldObj, this.rand, new BlockPos(var4, 0, var5));
 		this.onPopulate(par1IChunkProvider, par2, par3);
 
 		BlockFalling.fallInstantly = false;
