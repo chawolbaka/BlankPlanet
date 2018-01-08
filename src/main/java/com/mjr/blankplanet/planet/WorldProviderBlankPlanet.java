@@ -147,4 +147,10 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 		else
 			return super.calculateCelestialAngle(p_76563_1_, p_76563_3_);
 	}
+
+	@Override
+	public String getDungeonChestType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
