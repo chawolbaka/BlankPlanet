@@ -14,7 +14,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "0.5-1.11.2"
+version = "0.6-1.11.2"
 group= "com.mjr.blankplanet" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "BlankPlanet"
 
@@ -36,10 +36,11 @@ minecraft {
 
 dependencies {
 	compile files (
-		"../Galacticraft-API-1.11.2-4.0.1.120.jar",
-		"../GalacticraftCore-Dev-1.11.2-4.0.1.120.jar",
-		"../Galacticraft-Planets-Dev-1.11.2-4.0.1.120.jar",
-		"../MicdoodleCore-Dev-1.11.2-4.0.1.120.jar",
+		"Galacticraft-API-1.11.2-4.0.1.120.jar",
+		"GalacticraftCore-Dev-1.11.2-4.0.1.120.jar",
+		"Galacticraft-Planets-Dev-1.11.2-4.0.1.120.jar",
+		"MicdoodleCore-Dev-1.11.2-4.0.1.120.jar",
+		"MJRLegendsLib-1.11.2-1.0.2-dev.jar"
 	)
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
