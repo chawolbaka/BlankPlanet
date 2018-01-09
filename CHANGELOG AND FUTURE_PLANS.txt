@@ -3,6 +3,24 @@ TODO = Not yet done
  
  
 ===============================================Released Updates===============================================
+0.6
+*Fixed "Number ID of Dimesnion for 'Teleport Player on Death' option" config option not working
+*Removed not needed code
+*Clean up/Fix Formatting
+*Made all resources lowercase
+*Added Always Day Time & Always Night Time config options
+*Updated to latest Galacticraft API to latest
+*Added MJRLegends Lib as a dependency
+*Refactor to use code from MJRLegends Lib
+*Few fixes to match MJRLegends Lib changes
+*Changed requirement of MJRLegendsLib to 1.8.9-1.0.2 & above
+
+0.5
+*Fixed crash issue when Not Enough Items is installed
+
+0.4
+*Added Config option to disable Parachest spawning on teleport
+
 0.3
 *Config: Added categories to section the types of options
 *Config: Added Teleport on First Join/Every Join/On Death options
