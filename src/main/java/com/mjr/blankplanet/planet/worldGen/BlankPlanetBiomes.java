@@ -10,7 +10,6 @@ public class BlankPlanetBiomes extends BiomeGenBase {
 
 	public static final BiomeGenBase blankplanet = new BiomeGenBlankPlanet(BlankPlanet.biomeid).setBiomeName(BlankPlanet.biomename);
 
-	@SuppressWarnings("unchecked")
 	BlankPlanetBiomes(int var1) {
 		super(var1);
 		this.spawnableMonsterList.clear();
