@@ -143,8 +143,6 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderOverworld {
 				byte var15m = this.getDirtBlock().getMetadata();
 
 				for (int var16 = ChunkProviderNoBedRock.CHUNK_SIZE_Y - 1; var16 >= 0; --var16) {
-					final int index = this.getIndex(var8, var16, var9);
-
 					if (var16 <= 0 + this.rand.nextInt(5)) {
 						primer.setBlockState(var8, var16, var9, Blocks.AIR.getDefaultState());
 						// arrayOfIDs[index] = Blocks.AIR;
@@ -223,10 +221,6 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderOverworld {
 
 		var4.generateSkylightMap();
 		return var4;
-	}
-
-	private int getIndex(int x, int y, int z) {
-		return (x * 16 + z) * 256 + y;
 	}
 
 	public void decoratePlanet(World par1World, Random par2Random, BlockPos pos) {
