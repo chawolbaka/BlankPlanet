@@ -150,7 +150,6 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 
 	@Override
 	public String getDungeonChestType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
