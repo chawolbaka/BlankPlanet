@@ -176,7 +176,6 @@ public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGal
 
 	@Override
 	public ResourceLocation getDungeonChestType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }
