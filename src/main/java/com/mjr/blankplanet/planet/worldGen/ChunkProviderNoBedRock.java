@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.ChunkProviderOverworld;
+import net.minecraft.world.gen.ChunkGeneratorOverworld;
 
 import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
 
 /**
  * Do not include this prefab class in your released mod download.
  */
-public abstract class ChunkProviderNoBedRock extends ChunkProviderOverworld {
+public abstract class ChunkProviderNoBedRock extends ChunkGeneratorOverworld {
 	protected final Random rand;
 
 	private final Gradient noiseGen1;
@@ -193,7 +193,7 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderOverworld {
 	}
 
 	@Override
-	public Chunk provideChunk(int x, int z) {
+	public Chunk generateChunk(int x, int z) {
 		ChunkPrimer primer = new ChunkPrimer();
 		this.rand.setSeed(x * 341873128712L + z * 132897987541L);
 		// final Block[] ids = new Block[32768 * 2];
@@ -222,7 +222,7 @@ public abstract class ChunkProviderNoBedRock extends ChunkProviderOverworld {
 		var4.generateSkylightMap();
 		return var4;
 	}
-	
+
 	public void decoratePlanet(World par1World, Random par2Random, BlockPos pos) {
 		this.getBiomeGenerator().decorate(par1World, par2Random, null, pos);
 	}

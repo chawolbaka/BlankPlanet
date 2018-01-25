@@ -11,7 +11,9 @@ public class BiomeGenBlankPlanet extends BlankPlanetBiomes {
 	public BiomeGenBlankPlanet(BiomeProperties properties) {
 		super(properties);
 		Biome.registerBiome(BlankPlanet.biomeid, Constants.TEXTURE_PREFIX + this.getBiomeName(), this);
-		BiomeDictionary.addTypes(this, BiomeDictionary.Type.VOID);
 	}
 
+	public void registerTypes() {
+		BiomeDictionary.addTypes(this, BiomeDictionary.Type.VOID);
+	}
 }

@@ -1,6 +1,9 @@
 package com.mjr.blankplanet;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.List;
 
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
@@ -8,14 +11,18 @@ import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.Planet;
 import micdoodle8.mods.galacticraft.core.GCBlocks;
 import micdoodle8.mods.galacticraft.core.GalacticraftCore;
+import micdoodle8.mods.galacticraft.core.util.ConfigManagerCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -23,18 +30,22 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.google.common.collect.ObjectArrays;
 import com.mjr.blankplanet.handlers.ServerHandler;
 import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
 import com.mjr.blankplanet.planet.BlankPlanetEvents;
 import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
-import com.mjr.blankplanet.util.RegisterHelper;
-import com.mjr.mjrlegendslib.util.ClientUtilities;
+import com.mjr.blankplanet.planet.worldGen.BlankPlanetBiomes;
+import com.mjr.blankplanet.util.ClientUtilities;
+import com.mjr.mjrlegendslib.itemBlock.ItemBlockDefault;
 import com.mjr.mjrlegendslib.util.MCUtilities;
 import com.mjr.mjrlegendslib.util.RegisterUtilities;
+import com.mjr.mjrlegendslib.world.biomes.BiomeGenBase;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib@[1.11.2-1.0.2,);required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(13.20.1.2513,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib@[1.12.2-1.0.5,);required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(1.12.2-14.23.1.2555,);")
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
@@ -49,6 +60,11 @@ public class BlankPlanet {
 			return new ItemStack(Item.getItemFromBlock(GCBlocks.solarPanel));
 		}
 	};
+
+	// Block/Item/Biome Events Registering Lists
+	public static List<Item> itemList = new ArrayList<>();
+	public static List<Block> blocksList = new ArrayList<>();
+	public static List<BiomeGenBase> biomesList = new ArrayList<>();
 
 	public static Planet blankPlanet;
 
@@ -94,7 +110,7 @@ public class BlankPlanet {
 	public static DimensionType blackHole = DimensionType.register("blankPlanet", "BlankPlanet", dimensionid, WorldProviderBlankPlanet.class, false);
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event) throws NoSuchMethodException {
 		Configuration config = new Configuration(new File("config/BlankPlanet.cfg"));
 		config.load();
 
@@ -142,7 +158,7 @@ public class BlankPlanet {
 		RegisterUtilities.registerEventHandler(new ServerHandler());
 		BlankPlanet.proxy.preInit(event);
 
-		RegisterHelper.registerBlock(teleport, teleport.getUnlocalizedName().substring(5));
+		registerBlock(teleport, ItemBlockDefault.class, teleport.getUnlocalizedName().substring(5));
 	}
 
 	@EventHandler
@@ -171,5 +187,73 @@ public class BlankPlanet {
 		CapabilityStatsHandler.register();
 
 		BlankPlanet.proxy.postInit(event);
+	}
+
+	public static void registerBiomes() {
+		BlankPlanetBiomes.blankplanet.setRegistryName(Constants.TEXTURE_PREFIX + "blank_planet");
+		BlankPlanet.biomesList.add(BlankPlanetBiomes.blankplanet);
+	}
+
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemclass, String name, Object... itemCtorArgs) throws NoSuchMethodException {
+		if (block.getRegistryName() == null) {
+			block.setRegistryName(name);
+		}
+		BlankPlanet.blocksList.add(block);
+		if (itemclass != null) {
+			ItemBlock item = null;
+			Class<?>[] ctorArgClasses = new Class<?>[itemCtorArgs.length + 1];
+			ctorArgClasses[0] = Block.class;
+			for (int idx = 1; idx < ctorArgClasses.length; idx++) {
+				ctorArgClasses[idx] = itemCtorArgs[idx - 1].getClass();
+			}
+
+			try {
+				Constructor<? extends ItemBlock> constructor = itemclass.getConstructor(ctorArgClasses);
+				item = constructor.newInstance(ObjectArrays.concat(block, itemCtorArgs));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			BlankPlanet.itemList.add(item);
+			if (item.getRegistryName() == null) {
+				item.setRegistryName(name);
+			}
+		}
+	}
+
+	public static void registerItem(Item item, String name) {
+		if (item.getRegistryName() == null) {
+			item.setRegistryName(name);
+		}
+		BlankPlanet.itemList.add(item);
+	}
+
+	@Mod.EventBusSubscriber(modid = Constants.modID)
+	public static class RegistrationHandler {
+		@SubscribeEvent
+		public static void registerBlocksEvent(RegistryEvent.Register<Block> event) {
+			for (Block block : BlankPlanet.blocksList) {
+				event.getRegistry().register(block);
+			}
+		}
+
+		@SubscribeEvent
+		public static void registerItemsEvent(RegistryEvent.Register<Item> event) {
+			for (Item item : BlankPlanet.itemList) {
+				event.getRegistry().register(item);
+			}
+		}
+
+		@SubscribeEvent
+		public static void registerBiomesEvent(RegistryEvent.Register<Biome> event) {
+			// Register Biomes
+			BlankPlanet.registerBiomes();
+
+			for (BiomeGenBase biome : BlankPlanet.biomesList) {
+				event.getRegistry().register(biome);
+				if (!ConfigManagerCore.disableBiomeTypeRegistrations) {
+					biome.registerTypes();
+				}
+			}
+		}
 	}
 }

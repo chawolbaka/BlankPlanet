@@ -12,7 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
-import net.minecraft.world.chunk.IChunkGenerator;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import com.mjr.blankplanet.BlankPlanet;
 import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
