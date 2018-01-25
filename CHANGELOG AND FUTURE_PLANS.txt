@@ -3,6 +3,13 @@ TODO = Not yet done
  
  
 ===============================================Released Updates===============================================
+0.7
+*Changes for latest Galacticraft API changes
+
+*Removed not needed TODO tag comments within code
+
+*Removed not needed Suppressed Warning
+
 0.6
 *Fixed "Number ID of Dimesnion for 'Teleport Player on Death' option" config option not working
 *Removed not needed code
