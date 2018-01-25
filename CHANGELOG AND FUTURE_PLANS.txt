@@ -4,4 +4,4 @@ TODO = Not yet done
  
 ===============================================Released Updates===============================================
 0.1
-*Ported to 1.12.2 (Exact copy of v0.6 from 1.11.2)
+*Ported to 1.12.2 (Exact copy of v0.7 from 1.11.2)
