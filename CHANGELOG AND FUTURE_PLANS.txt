@@ -3,5 +3,9 @@ TODO = Not yet done
  
  
 ===============================================Released Updates===============================================
+0.2
+*Fixes for compatibility with Planet Progression, Fixed issue #3
+*Changed distance from sun for Black Hole, to work better with ExtraPlanets
+
 0.1
 *Ported to 1.12.2 (Exact copy of v0.7 from 1.11.2)
