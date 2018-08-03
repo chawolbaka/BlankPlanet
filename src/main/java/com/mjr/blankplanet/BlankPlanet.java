@@ -156,16 +156,7 @@ public class BlankPlanet {
 		config.save();
 		RegisterUtilities.registerEventHandler(new BlankPlanetEvents());
 		RegisterUtilities.registerEventHandler(new ServerHandler());
-		BlankPlanet.proxy.preInit(event);
-
-		registerBlock(teleport, ItemBlockDefault.class, teleport.getUnlocalizedName().substring(5));
-	}
-
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		if (MCUtilities.isClient()) {
-			ClientUtilities.registerBlockJson(Constants.TEXTURE_PREFIX, BlankPlanet.teleport, 0, BlankPlanet.teleport.getUnlocalizedName().substring(5));
-		}
+		
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
 		BlankPlanet.blankPlanet.setRingColorRGB(0.1F, 0.9F, 0.6F);
@@ -180,6 +171,17 @@ public class BlankPlanet {
 		GalacticraftRegistry.registerTeleportType(WorldProviderBlankPlanet.class, new TeleportTypeBlankPlanet());
 
 		GalacticraftRegistry.registerRocketGui(WorldProviderBlankPlanet.class, new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/rocket_gui.png"));
+		
+		BlankPlanet.proxy.preInit(event);
+
+		registerBlock(teleport, ItemBlockDefault.class, teleport.getUnlocalizedName().substring(5));
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
+		if (MCUtilities.isClient()) {
+			ClientUtilities.registerBlockJson(Constants.TEXTURE_PREFIX, BlankPlanet.teleport, 0, BlankPlanet.teleport.getUnlocalizedName().substring(5));
+		}
 	}
 
 	@EventHandler
