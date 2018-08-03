@@ -152,7 +152,7 @@ public class BlankPlanet {
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
 		BlankPlanet.blankPlanet.setRingColorRGB(0.1F, 0.9F, 0.6F);
 		BlankPlanet.blankPlanet.setPhaseShift(0.8F);
-		BlankPlanet.blankPlanet.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(2.50F, 2.50F));
+		BlankPlanet.blankPlanet.setRelativeDistanceFromCenter(new CelestialBody.ScalableDistance(5.00F, 5.00F));
 		BlankPlanet.blankPlanet.setRelativeOrbitTime(166.84118291347207009857612267251F);
 		BlankPlanet.blankPlanet.setBodyIcon(new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/celestialbodies/blankplanet.png"));
 		BlankPlanet.blankPlanet.setDimensionInfo(dimensionid, WorldProviderBlankPlanet.class);
