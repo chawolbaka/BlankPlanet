@@ -5,6 +5,21 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ObjectArrays;
+import com.mjr.blankplanet.handlers.ServerHandler;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
+import com.mjr.blankplanet.planet.BlankPlanetEvents;
+import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
+import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.planet.worldGen.BlankPlanetBiomes;
+import com.mjr.blankplanet.util.ClientUtilities;
+import com.mjr.extraplanets.Constants;
+import com.mjr.mjrlegendslib.itemBlock.ItemBlockDefault;
+import com.mjr.mjrlegendslib.util.MCUtilities;
+import com.mjr.mjrlegendslib.util.MessageUtilities;
+import com.mjr.mjrlegendslib.util.RegisterUtilities;
+import com.mjr.mjrlegendslib.world.biomes.BiomeGenBase;
+
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -27,23 +42,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.google.common.collect.ObjectArrays;
-import com.mjr.blankplanet.handlers.ServerHandler;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
-import com.mjr.blankplanet.planet.BlankPlanetEvents;
-import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
-import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
-import com.mjr.blankplanet.planet.worldGen.BlankPlanetBiomes;
-import com.mjr.blankplanet.util.ClientUtilities;
-import com.mjr.mjrlegendslib.itemBlock.ItemBlockDefault;
-import com.mjr.mjrlegendslib.util.MCUtilities;
-import com.mjr.mjrlegendslib.util.RegisterUtilities;
-import com.mjr.mjrlegendslib.world.biomes.BiomeGenBase;
 
 @Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = Constants.DEPENDENCIES_FORGE + Constants.DEPENDENCIES_MODS, certificateFingerprint = Constants.CERTIFICATEFINGERPRINT)
 public class BlankPlanet {
@@ -156,7 +159,7 @@ public class BlankPlanet {
 		config.save();
 		RegisterUtilities.registerEventHandler(new BlankPlanetEvents());
 		RegisterUtilities.registerEventHandler(new ServerHandler());
-		
+
 		BlankPlanet.blankPlanet = new Planet("BlackHole").setParentSolarSystem(GalacticraftCore.solarSystemSol);
 		BlankPlanet.blankPlanet.setTierRequired(rocketTier);
 		BlankPlanet.blankPlanet.setRingColorRGB(0.1F, 0.9F, 0.6F);
@@ -171,7 +174,7 @@ public class BlankPlanet {
 		GalacticraftRegistry.registerTeleportType(WorldProviderBlankPlanet.class, new TeleportTypeBlankPlanet());
 
 		GalacticraftRegistry.registerRocketGui(WorldProviderBlankPlanet.class, new ResourceLocation(Constants.ASSET_PREFIX, "textures/gui/rocket_gui.png"));
-		
+
 		BlankPlanet.proxy.preInit(event);
 
 		registerBlock(teleport, ItemBlockDefault.class, teleport.getUnlocalizedName().substring(5));
@@ -257,5 +260,10 @@ public class BlankPlanet {
 				}
 			}
 		}
+	}
+
+	@EventHandler
+	public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
+		MessageUtilities.fatalErrorMessageToLog(Constants.modID, "Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported!");
 	}
 }
