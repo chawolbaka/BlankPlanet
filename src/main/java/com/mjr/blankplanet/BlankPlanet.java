@@ -45,7 +45,7 @@ import com.mjr.mjrlegendslib.util.MCUtilities;
 import com.mjr.mjrlegendslib.util.RegisterUtilities;
 import com.mjr.mjrlegendslib.world.biomes.BiomeGenBase;
 
-@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = "required-after:mjrlegendslib@[1.12.2-1.0.5,);required-after:galacticraftcore;required-after:galacticraftplanets;required-after:forge@(14.23.1.2555,);")
+@Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = Constants.DEPENDENCIES_FORGE + Constants.DEPENDENCIES_MODS, certificateFingerprint = Constants.CERTIFICATEFINGERPRINT)
 public class BlankPlanet {
 
 	@SidedProxy(clientSide = "com.mjr.blankplanet.ClientProxy", serverSide = "com.mjr.blankplanet.CommonProxy")
