@@ -1,10 +1,10 @@
 package com.mjr.blankplanet.planet;
 
+import com.mjr.blankplanet.BlankPlanet;
+
 import micdoodle8.mods.galacticraft.api.event.oxygen.GCCoreOxygenSuffocationEvent;
 import micdoodle8.mods.galacticraft.core.event.EventWakePlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
-import com.mjr.blankplanet.BlankPlanet;
 
 public class BlankPlanetEvents {
 	@SubscribeEvent
