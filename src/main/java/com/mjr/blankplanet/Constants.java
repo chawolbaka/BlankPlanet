@@ -5,7 +5,7 @@ public class Constants {
 	public static final String modName = "BlankPlanet";
 	public static final String modVersion = "1.10.2-0.8";
 
-	public static final String MCVERSION = "[1.12.2]";
+	public static final String MCVERSION = "[1.10.2]";
 	public static final String DEPENDENCIES_FORGE = "required-after:Forge@[12.18.3.2239,);";
 	public static final String DEPENDENCIES_MODS = "required-after:mjrlegendslib@[1.10.2-1.0.2,);required-after:galacticraftcore;required-after:galacticraftplanets;";
 
