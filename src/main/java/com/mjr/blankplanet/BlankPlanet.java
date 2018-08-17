@@ -2,6 +2,17 @@ package com.mjr.blankplanet;
 
 import java.io.File;
 
+import com.mjr.blankplanet.handlers.ServerHandler;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
+import com.mjr.blankplanet.planet.BlankPlanetEvents;
+import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
+import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
+import com.mjr.blankplanet.util.RegisterHelper;
+import com.mjr.mjrlegendslib.util.ClientUtilities;
+import com.mjr.mjrlegendslib.util.MCUtilities;
+import com.mjr.mjrlegendslib.util.MessageUtilities;
+import com.mjr.mjrlegendslib.util.RegisterUtilities;
+
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -20,19 +31,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLFingerprintViolationEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
-import com.mjr.blankplanet.handlers.ServerHandler;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
-import com.mjr.blankplanet.planet.BlankPlanetEvents;
-import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
-import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
-import com.mjr.blankplanet.util.RegisterHelper;
-import com.mjr.mjrlegendslib.util.ClientUtilities;
-import com.mjr.mjrlegendslib.util.MCUtilities;
-import com.mjr.mjrlegendslib.util.RegisterUtilities;
 
 @Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = Constants.DEPENDENCIES_FORGE + Constants.DEPENDENCIES_MODS, certificateFingerprint = Constants.CERTIFICATEFINGERPRINT)
 public class BlankPlanet {
@@ -171,5 +173,10 @@ public class BlankPlanet {
 		CapabilityStatsHandler.register();
 
 		BlankPlanet.proxy.postInit(event);
+	}
+
+	@EventHandler
+	public void onFingerprintViolation(FMLFingerprintViolationEvent event) {
+		MessageUtilities.fatalErrorMessageToLog(Constants.modID, "Invalid fingerprint detected! The file " + event.getSource().getName() + " may have been tampered with. This version will NOT be supported!");
 	}
 }
