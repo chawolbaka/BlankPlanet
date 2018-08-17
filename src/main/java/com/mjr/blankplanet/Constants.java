@@ -3,7 +3,7 @@ package com.mjr.blankplanet;
 public class Constants {
 	public static final String modID = "BlankPlanet";
 	public static final String modName = "BlankPlanet";
-	public static final String modVersion = "0.7-1.8.9";
+	public static final String modVersion = "1.8.9-0.7";
 
 	public static final String MCVERSION = "[1.12.2]";
 	public static final String DEPENDENCIES_FORGE = "required-after:Forge@[11.15.1.1764,);";
