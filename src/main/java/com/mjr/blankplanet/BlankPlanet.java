@@ -2,6 +2,16 @@ package com.mjr.blankplanet;
 
 import java.io.File;
 
+import com.mjr.blankplanet.handlers.ServerHandler;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
+import com.mjr.blankplanet.planet.BlankPlanetEvents;
+import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
+import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
+import com.mjr.mjrlegendslib.util.ClientUtilities;
+import com.mjr.mjrlegendslib.util.MCUtilities;
+import com.mjr.mjrlegendslib.util.MessageUtilities;
+import com.mjr.mjrlegendslib.util.RegisterUtilities;
+
 import micdoodle8.mods.galacticraft.api.GalacticraftRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
@@ -23,16 +33,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.mjr.blankplanet.handlers.ServerHandler;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
-import com.mjr.blankplanet.planet.BlankPlanetEvents;
-import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
-import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
-import com.mjr.mjrlegendslib.util.ClientUtilities;
-import com.mjr.mjrlegendslib.util.MCUtilities;
-import com.mjr.mjrlegendslib.util.MessageUtilities;
-import com.mjr.mjrlegendslib.util.RegisterUtilities;
 
 @Mod(modid = Constants.modID, name = Constants.modName, version = Constants.modVersion, dependencies = Constants.DEPENDENCIES_FORGE + Constants.DEPENDENCIES_MODS, certificateFingerprint = Constants.CERTIFICATEFINGERPRINT)
 public class BlankPlanet {

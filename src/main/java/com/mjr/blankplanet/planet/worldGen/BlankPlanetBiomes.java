@@ -1,10 +1,10 @@
 package com.mjr.blankplanet.planet.worldGen;
 
+import com.mjr.blankplanet.BlankPlanet;
+
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedSpider;
 import micdoodle8.mods.galacticraft.core.entities.EntityEvolvedZombie;
 import net.minecraft.world.biome.BiomeGenBase;
-
-import com.mjr.blankplanet.BlankPlanet;
 
 public class BlankPlanetBiomes extends BiomeGenBase {
 

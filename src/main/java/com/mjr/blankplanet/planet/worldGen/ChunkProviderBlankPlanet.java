@@ -2,6 +2,9 @@ package com.mjr.blankplanet.planet.worldGen;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
+
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import net.minecraft.init.Blocks;
@@ -9,9 +12,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.chunk.IChunkProvider;
-
-import com.google.common.collect.Lists;
-import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
 
 public class ChunkProviderBlankPlanet extends ChunkProviderNoBedRock {
 
