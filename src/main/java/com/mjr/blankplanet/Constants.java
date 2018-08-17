@@ -3,9 +3,9 @@ package com.mjr.blankplanet;
 public class Constants {
 	public static final String modID = "blankplanet";
 	public static final String modName = "BlankPlanet";
-	public static final String modVersion = "0.7-1.11.2";
+	public static final String modVersion = "1.11.2-0.7";
 
-	public static final String MCVERSION = "[1.12.2]";
+	public static final String MCVERSION = "[1.11.2]";
 	public static final String DEPENDENCIES_FORGE = "required-after:forge@(13.20.1.2513,);";
 	public static final String DEPENDENCIES_MODS = "required-after:mjrlegendslib@[1.11.2-1.0.2,);required-after:galacticraftcore;required-after:galacticraftplanets;";
 
