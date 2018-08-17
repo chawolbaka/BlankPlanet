@@ -1,25 +1,15 @@
-
-// For those who want the bleeding edge
 buildscript {
     repositories {
         jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-/*
-// for people who want stable - not yet functional for MC 1.8.8 - we require the forgegradle 2.1 snapshot
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.2"
-}
-*/
 version = "0.7-1.8.9"
 group= "com.mjr.blankplanet" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "BlankPlanet"
@@ -28,7 +18,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
-    version = "1.8.9-11.15.1.1902-1.8.9"
+    version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_20"
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
@@ -49,12 +39,29 @@ processResources
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
     from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
+        include 'mcmod.info'    
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-	from(sourceSets.main.resources.srcDirs) {
+    from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.getProperty('keyStore')
+    alias = project.getProperty('keyStoreAlias')
+    storePass = project.getProperty('keyStorePass')
+    keyPass = project.getProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+build.dependsOn signJar
