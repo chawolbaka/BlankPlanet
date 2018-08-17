@@ -2,6 +2,9 @@ package com.mjr.blankplanet.util;
 
 import java.util.ArrayList;
 
+import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.Constants;
+
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.Moon;
@@ -11,9 +14,6 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-
-import com.mjr.blankplanet.BlankPlanet;
-import com.mjr.blankplanet.Constants;
 
 public class RegisterHelper {
 	private static int id = 0;

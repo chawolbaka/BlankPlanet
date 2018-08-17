@@ -3,6 +3,8 @@ package com.mjr.blankplanet.planet.worldGen;
 import java.util.List;
 import java.util.Random;
 
+import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
+
 import micdoodle8.mods.galacticraft.api.prefab.core.BlockMetaPair;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.MapGenBaseMeta;
 import micdoodle8.mods.galacticraft.core.perlin.generator.Gradient;
@@ -16,8 +18,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.ChunkGeneratorOverworld;
-
-import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
 
 /**
  * Do not include this prefab class in your released mod download.

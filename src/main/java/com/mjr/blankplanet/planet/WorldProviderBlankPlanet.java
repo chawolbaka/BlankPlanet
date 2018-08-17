@@ -2,6 +2,11 @@ package com.mjr.blankplanet.planet;
 
 import java.util.List;
 
+import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
+import com.mjr.blankplanet.planet.worldGen.ChunkProviderBlankPlanet;
+import com.mjr.mjrlegendslib.util.MCUtilities;
+
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.prefab.world.gen.WorldProviderSpace;
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
@@ -13,11 +18,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-
-import com.mjr.blankplanet.BlankPlanet;
-import com.mjr.blankplanet.planet.worldGen.BiomeProviderBlankPlanet;
-import com.mjr.blankplanet.planet.worldGen.ChunkProviderBlankPlanet;
-import com.mjr.mjrlegendslib.util.MCUtilities;
 
 public class WorldProviderBlankPlanet extends WorldProviderSpace implements IGalacticraftWorldProvider, ISolarLevel {
 	public WorldProviderBlankPlanet() {

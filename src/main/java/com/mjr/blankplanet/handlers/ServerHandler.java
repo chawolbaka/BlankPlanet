@@ -1,5 +1,10 @@
 package com.mjr.blankplanet.handlers;
 
+import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityProviderStats;
+import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
+import com.mjr.blankplanet.handlers.capabilities.IStatsCapability;
+
 import micdoodle8.mods.galacticraft.core.util.WorldUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,11 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
-
-import com.mjr.blankplanet.BlankPlanet;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityProviderStats;
-import com.mjr.blankplanet.handlers.capabilities.CapabilityStatsHandler;
-import com.mjr.blankplanet.handlers.capabilities.IStatsCapability;
 
 public class ServerHandler {
 	@SubscribeEvent

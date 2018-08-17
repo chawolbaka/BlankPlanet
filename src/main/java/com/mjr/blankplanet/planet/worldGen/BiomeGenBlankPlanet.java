@@ -8,6 +8,7 @@ public class BiomeGenBlankPlanet extends BlankPlanetBiomes {
 		super(properties);
 	}
 
+	@Override
 	public void registerTypes() {
 		BiomeDictionary.addTypes(this, BiomeDictionary.Type.VOID);
 	}
