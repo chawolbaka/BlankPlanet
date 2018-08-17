@@ -1,8 +1,8 @@
 package com.mjr.blankplanet.planet.worldGen;
 
-import net.minecraft.world.World;
-
 import com.mjr.mjrlegendslib.world.BiomeDecoratorBase;
+
+import net.minecraft.world.World;
 
 public class BiomeDecoratorBlankPlanet extends BiomeDecoratorBase {
 

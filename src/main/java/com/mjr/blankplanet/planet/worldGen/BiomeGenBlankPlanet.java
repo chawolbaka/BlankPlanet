@@ -1,10 +1,10 @@
 package com.mjr.blankplanet.planet.worldGen;
 
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
-
 import com.mjr.blankplanet.BlankPlanet;
 import com.mjr.blankplanet.Constants;
+
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomeGenBlankPlanet extends BlankPlanetBiomes {
 

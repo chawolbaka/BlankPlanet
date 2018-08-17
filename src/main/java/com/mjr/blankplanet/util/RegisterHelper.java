@@ -4,6 +4,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+import com.google.common.collect.ObjectArrays;
+import com.mjr.blankplanet.BlankPlanet;
+import com.mjr.blankplanet.Constants;
+
 import micdoodle8.mods.galacticraft.api.galaxies.CelestialBody;
 import micdoodle8.mods.galacticraft.api.galaxies.GalaxyRegistry;
 import micdoodle8.mods.galacticraft.api.galaxies.Moon;
@@ -16,10 +20,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import com.google.common.collect.ObjectArrays;
-import com.mjr.blankplanet.BlankPlanet;
-import com.mjr.blankplanet.Constants;
 
 public class RegisterHelper {
 	private static int id = 0;

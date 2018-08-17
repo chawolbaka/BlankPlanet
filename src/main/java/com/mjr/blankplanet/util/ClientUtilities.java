@@ -2,6 +2,8 @@ package com.mjr.blankplanet.util;
 
 import java.util.List;
 
+import com.mjr.blankplanet.Constants;
+
 import micdoodle8.mods.galacticraft.core.util.ClientUtil;
 import micdoodle8.mods.galacticraft.core.wrappers.ModelTransformWrapper;
 import micdoodle8.mods.galacticraft.planets.GalacticraftPlanets;
@@ -13,8 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.common.model.IModelState;
-
-import com.mjr.blankplanet.Constants;
 
 public class ClientUtilities {
 	public static void addExtraPlanetsVariants(String name, String... variants) {

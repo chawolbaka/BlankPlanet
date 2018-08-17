@@ -2,6 +2,8 @@ package com.mjr.blankplanet.planet;
 
 import java.util.Random;
 
+import com.mjr.blankplanet.BlankPlanet;
+
 import micdoodle8.mods.galacticraft.api.vector.Vector3;
 import micdoodle8.mods.galacticraft.api.world.ITeleportType;
 import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
@@ -12,8 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
-
-import com.mjr.blankplanet.BlankPlanet;
 
 public class TeleportTypeBlankPlanet implements ITeleportType {
 	@Override
