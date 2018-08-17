@@ -5,9 +5,7 @@ TODO = Not yet done
 ===============================================Released Updates===============================================
 0.7
 *Changes for latest Galacticraft API changes
-
 *Removed not needed TODO tag comments within code
-
 *Removed not needed Suppressed Warning
 
 0.6
