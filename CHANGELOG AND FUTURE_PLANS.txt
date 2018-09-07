@@ -3,13 +3,20 @@ TODO = Not yet done
  
  
 ===============================================Released Updates===============================================
-0.7
+v0.8
+*Tweaks for mod information to match my other mods layouts
+*Added Jar Signing
+*Clean Up, Fixed formatting issues
+*Changed version string to match my other mods format of MCVersion-ModVersion
+*Changed distance from sun for Black Hole, to work better with ExtraPlanets
+
+v0.7
 *Changes for latest Galacticraft API changes
 *Removed not needed TODO tag comments within code
 *Removed not needed Suppressed Warning
 *Removed unneeded code
 
-0.6
+v0.6
 *Fixed "Number ID of Dimesnion for 'Teleport Player on Death' option" config option not working
 *Clean up/Fix Formatting
 *Made all resources lowercase
@@ -22,19 +29,19 @@ TODO = Not yet done
 *Update forge to 13.20.1.2513
 
 
-0.5
+v0.5
 *Fixed crash issue when Not Enough Items is installed
 
-0.4
+v0.4
 *Added Config option to disable Parachest spawning on teleport
 
-0.3
+v0.3
 *Fixed server side crash
 
-0.2
+v0.2
 *Config: Added categories to section the types of options
 *Config: Added Teleport on First Join/Every Join/On Death options
 *Config: Removed not needed config option
 
-0.1
+v0.1
 *Ported to 1.11.2 (Exact copy of v0.2 from 1.10.2)
