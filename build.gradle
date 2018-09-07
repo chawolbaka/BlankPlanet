@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-version = "1.8.9-0.7"
+version = "1.8.9-0.8"
 group= "com.mjr.blankplanet" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "BlankPlanet"
 
@@ -30,7 +30,7 @@ dependencies {
 		"GalacticraftCore-Dev-1.8.9-4.0.1.122.jar",
 		"Galacticraft-Planets-Dev-1.8.9-4.0.1.122.jar",
 		"MicdoodleCore-Dev-1.8.9-4.0.1.122.jar",
-		"MJRLegendsLib-1.8.9-1.0.3-dev.jar"
+		"MJRLegendsLib-1.8.9-1.0.4-dev.jar"
 	)
 }
 
