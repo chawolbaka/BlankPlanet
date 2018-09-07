@@ -15,6 +15,7 @@ v0.8
 *Removed not needed TODO tag comments within code
 *Removed not needed Suppressed Warning
 *Removed unneeded code
+*Changed requirement of MJRLegendsLib to 1.10.2-1.0.3 & above
 
 v0.7
 *Fixed "Number ID of Dimesnion for 'Teleport Player on Death' option" config option not working
