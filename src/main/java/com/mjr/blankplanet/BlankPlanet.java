@@ -13,7 +13,6 @@ import com.mjr.blankplanet.planet.TeleportTypeBlankPlanet;
 import com.mjr.blankplanet.planet.WorldProviderBlankPlanet;
 import com.mjr.blankplanet.planet.worldGen.BlankPlanetBiomes;
 import com.mjr.blankplanet.util.ClientUtilities;
-import com.mjr.extraplanets.Constants;
 import com.mjr.mjrlegendslib.itemBlock.ItemBlockDefault;
 import com.mjr.mjrlegendslib.util.MCUtilities;
 import com.mjr.mjrlegendslib.util.MessageUtilities;
