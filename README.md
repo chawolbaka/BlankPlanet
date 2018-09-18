@@ -1,3 +1,5 @@
+[![](http://cf.way2muchnoise.eu/full_blank-planet_downloads.svg)](https://minecraft.curseforge.com/projects/blank-planet) [![](http://cf.way2muchnoise.eu/versions/Minecraft_blank-planet_all.svg)](https://minecraft.curseforge.com/projects/blank-planet)
+
 # BlankPlanet
 A Galacticraft Addon, Made by MJRLegends
 
