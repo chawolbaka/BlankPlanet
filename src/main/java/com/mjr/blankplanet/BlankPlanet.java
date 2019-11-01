@@ -86,6 +86,7 @@ public class BlankPlanet {
 
 	public static int rocketTier;
 	public static boolean breathable;
+	public static boolean oxygen;
 	public static float gravity;
 	public static float fallDamage;
 	public static float windLevel;
@@ -128,6 +129,7 @@ public class BlankPlanet {
 
 		rocketTier = config.get(CATEGORY_WORLD, "Rocket reqiured", "3").getInt();
 		breathable = config.get(CATEGORY_WORLD, "Breathable Atmosphere", false).getBoolean(false);
+		oxygen = !config.get(CATEGORY_WORLD, "Oxygen required", true).getBoolean(true);
 		gravity = (float) config.get(CATEGORY_WORLD, "Gravity", "0.058").getDouble();
 		daylength = config.get(CATEGORY_WORLD, "Day Length", "24000").getInt();
 		solar = config.get(CATEGORY_WORLD, "Solar Energy Multiplier", "8.0").getDouble();

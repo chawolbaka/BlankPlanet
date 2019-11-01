@@ -10,7 +10,7 @@ public class BlankPlanetEvents {
 	@SubscribeEvent
 	public void GCCoreOxygenSuffocationEvent(GCCoreOxygenSuffocationEvent.Pre event) {
 		if (event.getEntityLiving().world.provider.getDimension() == BlankPlanet.dimensionid) {
-			event.setCanceled(true);
+			event.setCanceled(BlankPlanet.oxygen);
 		}
 	}
 
